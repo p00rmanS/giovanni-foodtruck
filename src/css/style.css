@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee&family=Poppins:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #fffaf2;
+  color: #1a1410;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: #f9541c;
+  color: #fffaf2;
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+}
+.reveal.is-visible {
+  animation: reveal-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes reveal-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Menu card tilt */
+.menu-card {
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s ease;
+}
+.menu-card:hover {
+  transform: translateY(-10px) rotate(-1deg);
+  box-shadow: 0 30px 60px -20px rgba(26, 20, 16, 0.35);
+}
+
+/* Sticky nav blur state */
+.nav-scrolled {
+  backdrop-filter: blur(14px) saturate(160%);
+  background-color: rgba(26, 20, 16, 0.85) !important;
+  box-shadow: 0 8px 30px -12px rgba(0, 0, 0, 0.5);
+}
+
+/* Marquee track */
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 26s linear infinite;
+}
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* Sun/wave decorative background */
+.wave-divider {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,40 C300,100 900,0 1200,60 L1200,120 L0,120 Z' fill='%23fffaf2'/%3E%3C/svg%3E");
+  background-size: 1200px 100%;
+}
+
+/* Grain overlay */
+.grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.05;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #fffaf2;
+}
+::-webkit-scrollbar-thumb {
+  background: #f9541c;
+  border-radius: 999px;
+}
+
+/* Signature texture button */
+.btn-pop {
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+}
+.btn-pop:hover {
+  transform: translateY(-3px) scale(1.03);
+}
+.btn-pop:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Timeline line draw */
+.timeline-line {
+  transform-origin: top;
+  transform: scaleY(0);
+}
+.timeline-line.is-visible {
+  animation: draw-line 1.6s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+@keyframes draw-line {
+  to {
+    transform: scaleY(1);
+  }
+}
+
+/* Text stroke for hero headline */
+.stroke-ink {
+  -webkit-text-stroke: 1.5px #1a1410;
+}
+
+.font-display {
+  letter-spacing: 0.5px;
+}
+
+/* Print only the truck-window QR card, triggered by body.printing-qr */
+@media print {
+  body.printing-qr * {
+    visibility: hidden;
+  }
+  body.printing-qr #qr-print-card,
+  body.printing-qr #qr-print-card * {
+    visibility: visible;
+  }
+  body.printing-qr #qr-print-card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+

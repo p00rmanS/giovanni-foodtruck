@@ -1,0 +1,803 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>Giovanni's Shrimp Truck | North Shore, Oahu · Est. 1993</title>
+  <meta name="description" content="Giovanni's Shrimp Truck: famous garlic shrimp on Oahu's North Shore since 1993. Kahuku, Haleiwa & Honolulu. A concept redesign." />
+  <link rel="icon" href="/assets/emblem.png" />
+</head>
+<body class="font-body antialiased">
+
+  <!-- Loader -->
+  <div id="loader" class="fixed inset-0 z-[100] flex items-center justify-center bg-ink">
+    <img src="/assets/emblem.png" alt="" class="h-16 w-16 rounded-full object-cover animate-pulse-soft" />
+  </div>
+
+  <!-- Nav -->
+  <header id="site-nav" class="fixed top-0 inset-x-0 z-50 transition-colors duration-300">
+    <!-- Utility bar -->
+    <div class="bg-black/90 text-white/75 text-[11px] md:text-xs border-b border-white/10">
+      <div class="max-w-7xl mx-auto px-5 md:px-8 h-9 flex items-center justify-between gap-3">
+        <div class="flex items-center gap-3 md:gap-4 min-w-0">
+          <span class="hidden sm:inline-flex items-center gap-1.5 shrink-0">
+            <svg class="h-3.5 w-3.5 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8.5" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5V12l3 2" /></svg>
+            <span id="live-date"></span>
+          </span>
+          <span class="hidden sm:inline-block h-3 w-px bg-white/15 shrink-0"></span>
+          <span id="live-weather" class="inline-flex items-center gap-1.5 shrink-0">
+            <svg id="weather-icon" class="h-3.5 w-3.5 opacity-90" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4.2" /><path stroke-linecap="round" d="M12 3v2.2M12 18.8V21M4.2 12H2M22 12h-2.2M5.6 5.6l1.6 1.6M16.8 16.8l1.6 1.6M18.4 5.6l-1.6 1.6M7.2 16.8l-1.6 1.6" /></svg>
+            <span id="weather-temp">Kahuku --°F</span>
+          </span>
+        </div>
+        <div class="relative shrink-0">
+          <button id="lang-toggle" class="flex items-center gap-2 hover:text-white transition-colors" aria-haspopup="true" aria-expanded="false">
+            <img id="lang-flag" src="/assets/flags/us.svg" alt="" class="h-3.5 w-5 rounded-[2px] object-cover ring-1 ring-white/20" />
+            <span id="lang-label">English</span>
+            <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
+          </button>
+          <div id="lang-menu" class="hidden absolute right-0 top-full mt-2 w-52 max-h-80 overflow-y-auto bg-white text-ink rounded-xl shadow-2xl z-50 py-1.5">
+            <button class="lang-option flex items-center gap-2.5 w-full text-left px-4 py-2 text-sm hover:bg-shrimp-50 transition-colors" data-lang="en" data-flag="us"><img src="/assets/flags/us.svg" alt="" class="h-3.5 w-5 rounded-[2px] object-cover ring-1 ring-black/10" /> English</button>
+            <button class="lang-option flex items-center gap-2.5 w-full text-left px-4 py-2 text-sm hover:bg-shrimp-50 transition-colors" data-lang="es" data-flag="es"><img src="/assets/flags/es.svg" alt="" class="h-3.5 w-5 rounded-[2px] object-cover ring-1 ring-black/10" /> Español</button>
+            <button class="lang-option flex items-center gap-2.5 w-full text-left px-4 py-2 text-sm hover:bg-shrimp-50 transition-colors" data-lang="vi" data-flag="vn"><img src="/assets/flags/vn.svg" alt="" class="h-3.5 w-5 rounded-[2px] object-cover ring-1 ring-black/10" /> Tiếng Việt</button>
+            <button class="lang-option flex items-center gap-2.5 w-full text-left px-4 py-2 text-sm hover:bg-shrimp-50 transition-colors" data-lang="zh-CN" data-flag="cn"><img src="/assets/flags/cn.svg" alt="" class="h-3.5 w-5 rounded-[2px] object-cover ring-1 ring-black/10" /> 中文（普通话）</button>
+            <button class="lang-option flex items-center gap-2.5 w-full text-left px-4 py-2 text-sm hover:bg-shrimp-50 transition-colors" data-lang="yue" data-flag="hk"><img src="/assets/flags/hk.svg" alt="" class="h-3.5 w-5 rounded-[2px] object-cover ring-1 ring-black/10" /> 廣東話</button>
+            <button class="lang-option flex items-center gap-2.5 w-full text-left px-4 py-2 text-sm hover:bg-shrimp-50 transition-colors" data-lang="ja" data-flag="jp"><img src="/assets/flags/jp.svg" alt="" class="h-3.5 w-5 rounded-[2px] object-cover ring-1 ring-black/10" /> 日本語</button>
+            <button class="lang-option flex items-center gap-2.5 w-full text-left px-4 py-2 text-sm hover:bg-shrimp-50 transition-colors" data-lang="ko" data-flag="kr"><img src="/assets/flags/kr.svg" alt="" class="h-3.5 w-5 rounded-[2px] object-cover ring-1 ring-black/10" /> 한국어</button>
+            <button class="lang-option flex items-center gap-2.5 w-full text-left px-4 py-2 text-sm hover:bg-shrimp-50 transition-colors" data-lang="de" data-flag="de"><img src="/assets/flags/de.svg" alt="" class="h-3.5 w-5 rounded-[2px] object-cover ring-1 ring-black/10" /> Deutsch</button>
+            <button class="lang-option flex items-center gap-2.5 w-full text-left px-4 py-2 text-sm hover:bg-shrimp-50 transition-colors" data-lang="fr" data-flag="fr"><img src="/assets/flags/fr.svg" alt="" class="h-3.5 w-5 rounded-[2px] object-cover ring-1 ring-black/10" /> Français</button>
+            <button class="lang-option flex items-center gap-2.5 w-full text-left px-4 py-2 text-sm hover:bg-shrimp-50 transition-colors" data-lang="tl" data-flag="ph"><img src="/assets/flags/ph.svg" alt="" class="h-3.5 w-5 rounded-[2px] object-cover ring-1 ring-black/10" /> Tagalog</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="max-w-7xl mx-auto flex items-center justify-between px-5 md:px-8 py-3">
+      <a href="#top" class="flex items-center gap-3 group">
+        <img src="/assets/emblem.png" alt="Giovanni's Shrimp Truck emblem" class="h-12 w-12 md:h-14 md:w-14 rounded-full object-cover shadow-lg transition-transform duration-500 group-hover:rotate-12" />
+        <span class="font-heading font-extrabold text-lg md:text-xl text-sun-500 tracking-tight leading-none">
+          GIOVANNI'S<span class="block text-[10px] md:text-xs font-semibold tracking-[0.3em] text-white/80">SHRIMP TRUCK</span>
+        </span>
+      </a>
+
+      <div class="hidden md:flex items-center gap-8 text-sm font-semibold tracking-wide text-white/90">
+        <a href="#menu" data-i18n="nav_menu" class="hover:text-sun-400 transition-colors">Menu</a>
+        <a href="#story" data-i18n="nav_story" class="hover:text-sun-400 transition-colors">Our Story</a>
+        <a href="#history" data-i18n="nav_history" class="hover:text-sun-400 transition-colors">History</a>
+        <a href="#locations" data-i18n="nav_locations" class="hover:text-sun-400 transition-colors">Locations</a>
+        <a href="#press" data-i18n="nav_press" class="hover:text-sun-400 transition-colors">Press</a>
+      </div>
+
+      <a href="#locations" data-i18n="nav_cta" class="btn-pop hidden md:inline-flex items-center gap-2 bg-shrimp-500 hover:bg-shrimp-600 text-white font-heading font-bold text-sm px-5 py-2.5 rounded-full shadow-lg shadow-shrimp-500/30">
+        Find a Truck
+      </a>
+
+      <button id="menu-toggle" aria-label="Toggle menu" class="md:hidden text-white p-2">
+        <svg id="icon-burger" xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </nav>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="md:hidden max-h-0 overflow-hidden transition-[max-height] duration-500 ease-in-out bg-ink/95 backdrop-blur">
+      <div class="flex flex-col px-6 py-4 gap-4 text-white font-semibold">
+        <a href="#menu" data-i18n="nav_menu" class="mobile-link py-1">Menu</a>
+        <a href="#story" data-i18n="nav_story" class="mobile-link py-1">Our Story</a>
+        <a href="#history" data-i18n="nav_history" class="mobile-link py-1">History</a>
+        <a href="#locations" data-i18n="nav_locations" class="mobile-link py-1">Locations</a>
+        <a href="#press" data-i18n="nav_press" class="mobile-link py-1">Press</a>
+        <a href="#locations" data-i18n="nav_cta" class="mobile-link py-2 text-center bg-shrimp-500 rounded-full">Find a Truck</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="top" class="relative min-h-[100svh] flex items-center justify-center overflow-hidden bg-ink grain">
+    <!--
+      Hero background media. Currently a blurred still photo (the source crop is
+      low-res, so it's blurred on purpose rather than shown sharp).
+      To swap in a landscape video later, replace the <img> below with:
+        <video autoplay muted loop playsinline poster="/assets/truck.png" class="w-full h-full object-cover">
+          <source src="/assets/hero-truck.mp4" type="video/mp4" />
+        </video>
+      Drop the video file into public/assets/ and update the src above. Everything
+      else (gradient, glow blobs, text) sits on top and needs no changes.
+    -->
+    <div id="hero-media" class="absolute inset-0 scale-110">
+      <img src="/assets/truck.png" alt="" class="w-full h-full object-cover blur-3xl opacity-50" />
+    </div>
+    <div class="absolute inset-0 bg-gradient-to-b from-ink/50 via-ink/75 to-ink"></div>
+
+    <div class="absolute inset-0 opacity-70">
+      <div class="absolute -top-24 -left-24 h-[28rem] w-[28rem] rounded-full bg-shrimp-500/40 blur-3xl animate-blob" data-parallax="0.4"></div>
+      <div class="absolute top-1/3 -right-32 h-[26rem] w-[26rem] rounded-full bg-lagoon-500/30 blur-3xl animate-blob [animation-delay:2s]" data-parallax="0.7"></div>
+      <div class="absolute bottom-0 left-1/3 h-80 w-80 rounded-full bg-sun-500/20 blur-3xl animate-blob [animation-delay:4s]" data-parallax="0.55"></div>
+    </div>
+
+    <div class="relative max-w-2xl mx-auto px-5 md:px-8 pt-32 pb-20 w-full flex flex-col items-center text-center">
+      <img src="/assets/emblem.png" alt="Giovanni's Shrimp Truck emblem" class="hero-in h-16 w-16 md:h-20 md:w-20 rounded-full object-cover shadow-xl ring-2 ring-white/15 mb-5" />
+      <span data-i18n="hero_badge" class="hero-in text-sun-400 font-heading font-bold text-xs md:text-sm tracking-[0.25em] uppercase mb-5">
+        North Shore, O'ahu · Est. 1993
+      </span>
+      <h1 class="font-display text-white leading-[0.95] mb-6">
+        <span class="hero-in block text-[13vw] md:text-6xl lg:text-7xl">GARLIC</span>
+        <span class="hero-in block text-[13vw] md:text-6xl lg:text-7xl text-shrimp-500 stroke-ink">SHRIMP</span>
+        <span class="hero-in block text-[13vw] md:text-6xl lg:text-7xl">TRUCK</span>
+      </h1>
+      <p data-i18n="hero_sub" class="hero-in text-white/70 text-base md:text-lg max-w-md mb-8 font-body">
+        A dozen jumbo shrimp, fresh garlic, and two scoops of rice, cooked truckside on O'ahu's North Shore since 1993.
+      </p>
+      <div class="hero-in flex flex-wrap gap-4 justify-center">
+        <a href="#menu" class="btn-pop bg-shrimp-500 hover:bg-shrimp-600 text-white font-heading font-bold px-7 py-3.5 rounded-full shadow-xl shadow-shrimp-500/30 inline-flex items-center gap-2">
+          <span data-i18n="hero_cta1">View The Menu</span>
+          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+        </a>
+        <a href="#locations" class="btn-pop bg-white/10 hover:bg-white/20 text-white font-heading font-bold px-7 py-3.5 rounded-full border border-white/20 backdrop-blur inline-flex items-center gap-2">
+          <span data-i18n="hero_cta2">Truck Locations</span>
+        </a>
+      </div>
+    </div>
+
+    <a href="#marquee" class="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/60 hover:text-white transition-colors animate-bob [animation-duration:2.5s]" aria-label="Scroll down">
+      <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" /></svg>
+    </a>
+  </section>
+
+  <!-- MARQUEE -->
+  <div id="marquee" class="bg-shrimp-500 py-3.5 overflow-hidden border-y-4 border-ink">
+    <div class="marquee-track font-display text-ink text-lg md:text-2xl gap-10 whitespace-nowrap">
+      <span class="flex items-center gap-10 pr-10">
+        <span>FAMOUS GARLIC SHRIMP</span><span>★</span>
+        <span>NORTH SHORE O'AHU</span><span>★</span>
+        <span>EST. 1993</span><span>★</span>
+        <span>HOT &amp; SPICY</span><span>★</span>
+        <span>ALOHA SERVED DAILY</span><span>★</span>
+      </span>
+      <span class="flex items-center gap-10 pr-10" aria-hidden="true">
+        <span>FAMOUS GARLIC SHRIMP</span><span>★</span>
+        <span>NORTH SHORE O'AHU</span><span>★</span>
+        <span>EST. 1993</span><span>★</span>
+        <span>HOT &amp; SPICY</span><span>★</span>
+        <span>ALOHA SERVED DAILY</span><span>★</span>
+      </span>
+    </div>
+  </div>
+
+  <!-- STORY / STATS -->
+  <section id="story" class="relative bg-[#fffaf2] py-24 md:py-32 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-5 md:px-8 grid md:grid-cols-2 gap-16 items-center">
+      <div class="reveal">
+        <span data-i18n="eyebrow_story" class="font-heading font-bold text-shrimp-500 tracking-[0.25em] uppercase text-xs md:text-sm">Our Story</span>
+        <h2 class="font-heading font-black text-3xl md:text-5xl mt-3 mb-6 leading-tight">Every Signature<br />Tells a Story.</h2>
+        <p class="text-ink/70 text-base md:text-lg leading-relaxed mb-6">
+          As the story goes, back in 1993 a customer from El Paso, Texas grabbed a marker and left his mark on the shrimp truck. The crew liked it, so they let it stay. A few more signatures showed up the next day, and the tradition never stopped.
+        </p>
+        <p class="text-ink/70 text-base md:text-lg leading-relaxed mb-10">
+          Today the truck is covered edge to edge in thousands of names from customers all over the world. It's basically a rolling guestbook of everyone who's stopped by for a plate.
+        </p>
+
+        <div class="grid grid-cols-3 gap-4 md:gap-8">
+          <div class="reveal" data-delay="0">
+            <div class="font-display text-3xl md:text-5xl text-shrimp-500" data-counter="33">0</div>
+            <div class="text-xs md:text-sm font-semibold text-ink/60 mt-1">Years of Aloha</div>
+          </div>
+          <div class="reveal" data-delay="150">
+            <div class="font-display text-3xl md:text-5xl text-lagoon-600" data-counter="3">0</div>
+            <div class="text-xs md:text-sm font-semibold text-ink/60 mt-1">Truck Locations</div>
+          </div>
+          <div class="reveal" data-delay="300">
+            <div class="font-display text-3xl md:text-5xl text-sun-600" data-counter="12">0</div>
+            <div class="text-xs md:text-sm font-semibold text-ink/60 mt-1">Jumbo Shrimp / Plate</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal relative flex justify-center">
+        <div class="absolute -inset-8 bg-gradient-to-br from-shrimp-200/60 via-sun-200/40 to-lagoon-200/60 rounded-[3rem] blur-2xl"></div>
+        <div class="relative bg-ink rounded-[2.5rem] p-3 shadow-2xl rotate-2 hover:rotate-0 transition-transform duration-500">
+          <img src="/assets/truck-signatures.png" alt="Close-up of thousands of customer signatures covering Giovanni's shrimp truck" class="rounded-[2rem] w-72 md:w-96 h-72 md:h-96 object-cover" />
+        </div>
+        <img src="/assets/emblem.png" alt="Giovanni's Shrimp Truck emblem" class="absolute -top-6 -left-6 h-16 w-16 md:h-20 md:w-20 rounded-full object-cover shadow-xl ring-4 ring-[#fffaf2]" />
+        <div class="absolute -bottom-6 -right-2 md:right-6 bg-lagoon-500 text-white font-heading font-bold text-xs md:text-sm px-5 py-3 rounded-2xl shadow-xl -rotate-3 inline-flex items-center gap-2">
+          <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z" /><path d="M3 21c2.5-1.6 5-1.6 7.5 0s5 1.6 7.5 0" opacity=".55" /></svg>
+          1,000s of signatures
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section id="menu" class="relative bg-ink py-24 md:py-32 grain overflow-hidden">
+    <div class="max-w-7xl mx-auto px-5 md:px-8">
+      <div class="reveal text-center max-w-2xl mx-auto mb-16">
+        <span data-i18n="eyebrow_menu" class="font-heading font-bold text-sun-400 tracking-[0.25em] uppercase text-xs md:text-sm">The Menu</span>
+        <h2 class="font-heading font-black text-3xl md:text-5xl text-white mt-3 mb-4">Straight Off The Griddle</h2>
+        <p class="text-white/60">Every plate is served with a dozen jumbo shrimp and two scoops of rice.</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-14">
+        <!-- Scampi -->
+        <div class="menu-card bg-[#fffaf2] rounded-3xl overflow-hidden flex flex-col shadow-xl" data-delay="0">
+          <div class="h-32 overflow-hidden">
+            <img src="/assets/scampi.png" alt="Giovanni's Shrimp Scampi plate with rice" class="w-full h-full object-cover" />
+          </div>
+          <div class="p-6 flex flex-col flex-1">
+          <h3 class="font-heading font-extrabold text-lg mb-2">Shrimp Scampi</h3>
+          <p class="text-ink/60 text-sm flex-1 mb-4">Garlicky, buttery, and world-famous. Marinated in olive oil, fresh chopped garlic, and lemon.</p>
+          <div class="flex items-center justify-between">
+            <span class="font-display text-shrimp-500 text-2xl">$15</span>
+            <span class="text-xs font-semibold bg-shrimp-100 text-shrimp-600 px-3 py-1 rounded-full">Signature</span>
+          </div>
+          </div>
+        </div>
+        <!-- Hot & Spicy -->
+        <div class="menu-card bg-[#fffaf2] rounded-3xl p-6 flex flex-col shadow-xl" data-delay="100">
+          <div class="h-11 w-11 rounded-2xl bg-red-100 flex items-center justify-center mb-4">
+            <svg class="h-6 w-6 text-red-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8.7 5c2.6-1.9 5-1 5.2.9.1 1-.5 1.7-1.3 2.2" /><path d="M7.2 7.3c-2.5 1.5-3.5 4.8-2.6 8 1 3.2 3.9 5.4 6.7 5 3.4-.6 5.6-4.2 4.7-8-.7-3.4-4.1-6.3-7-6-.6.1-1.2.3-1.8.6Z" /></svg>
+          </div>
+          <h3 class="font-heading font-extrabold text-lg mb-2">"No Refunds" Hot &amp; Spicy</h3>
+          <p class="text-ink/60 text-sm flex-1 mb-4">Shell-on shrimp tossed in a fiery red sauce. Consider yourself warned: it lives up to the name.</p>
+          <div class="flex items-center justify-between">
+            <span class="font-display text-shrimp-500 text-2xl">$15</span>
+            <span class="text-xs font-semibold bg-red-100 text-red-600 px-3 py-1 rounded-full">Spicy</span>
+          </div>
+        </div>
+        <!-- Lemon Butter -->
+        <div class="menu-card bg-[#fffaf2] rounded-3xl p-6 flex flex-col shadow-xl" data-delay="200">
+          <div class="h-11 w-11 rounded-2xl bg-sun-100 flex items-center justify-center mb-4">
+            <svg class="h-6 w-6 text-sun-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="7" /><path d="M8.3 10c1.3 1.3 1.3 5.7 0 7M15.7 10c-1.3 1.3-1.3 5.7 0 7" /><path d="M12 6c.5-1.9 2.3-2.9 4.1-2.5-.4 1.9-2.2 3-4.1 2.5Z" /></svg>
+          </div>
+          <h3 class="font-heading font-extrabold text-lg mb-2">Lemon Butter Shrimp</h3>
+          <p class="text-ink/60 text-sm flex-1 mb-4">Shell-on shrimp in a bright, creamy lemon-butter sauce. Simple, and always a favorite.</p>
+          <div class="flex items-center justify-between">
+            <span class="font-display text-shrimp-500 text-2xl">$15</span>
+            <span class="text-xs font-semibold bg-lagoon-100 text-lagoon-600 px-3 py-1 rounded-full">Fan Favorite</span>
+          </div>
+        </div>
+        <!-- Hot Dog -->
+        <div class="menu-card bg-[#fffaf2] rounded-3xl p-6 flex flex-col shadow-xl" data-delay="300">
+          <div class="h-11 w-11 rounded-2xl bg-shrimp-100 flex items-center justify-center mb-4">
+            <svg class="h-6 w-6 text-shrimp-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 15c0-2.2 1.8-4 4-4h9c2.2 0 4 1.8 4 4s-1.8 4-4 4h-9c-2.2 0-4-1.8-4-4Z" /><path d="M5.2 13c1 1.3 2 1.3 3 0s2-1.3 3 0 2 1.3 3 0 2-1.3 3 0" /></svg>
+          </div>
+          <h3 class="font-heading font-extrabold text-lg mb-2">Jumbo Garlic Hot Dog</h3>
+          <p class="text-ink/60 text-sm flex-1 mb-4">Plump aloha dog, smothered in our famous scampi sauce and served with two scoops of rice.</p>
+          <div class="flex items-center justify-between">
+            <span class="font-display text-shrimp-500 text-2xl">$5</span>
+            <span class="text-xs font-semibold bg-sun-100 text-sun-600 px-3 py-1 rounded-full">Local Favorite</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal grid md:grid-cols-3 gap-6">
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-6 text-white/80">
+          <h4 class="font-heading font-bold text-sun-400 mb-3">Sides &amp; Half Plates</h4>
+          <ul class="text-sm space-y-1.5">
+            <li class="flex justify-between"><span>Half Plate (6 shrimp, 1 rice)</span><span class="font-semibold">$8</span></li>
+            <li class="flex justify-between"><span>Extra Rice</span><span class="font-semibold">$2</span></li>
+            <li class="flex justify-between"><span>Homemade Mac Salad</span><span class="font-semibold">$2.50</span></li>
+          </ul>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-6 text-white/80">
+          <h4 class="font-heading font-bold text-sun-400 mb-3">Drinks (All $1.50)</h4>
+          <p class="text-sm">Pepsi · Diet Pepsi · Iced Tea · Passion Orange · Bottled Water</p>
+        </div>
+        <div class="bg-shrimp-500/15 border border-shrimp-500/30 rounded-2xl p-6 text-white">
+          <h4 class="font-heading font-bold mb-3">Party Platters</h4>
+          <p class="text-sm text-white/80 mb-3">Advance orders recommended. Wait times vary by location.</p>
+          <a href="tel:+18082931839" class="font-heading font-bold text-shrimp-400 hover:text-shrimp-300">(808) 293-1839</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTY PLATTERS + PRINTABLE QR -->
+  <section id="party" class="relative bg-[#fffaf2] py-24 md:py-32 overflow-hidden">
+    <div class="max-w-6xl mx-auto px-5 md:px-8">
+      <div class="reveal text-center max-w-2xl mx-auto mb-16">
+        <span class="font-heading font-bold text-shrimp-500 tracking-[0.25em] uppercase text-xs md:text-sm">Plan Ahead</span>
+        <h2 class="font-heading font-black text-3xl md:text-5xl mt-3">Feeding A Group? Or Just Spreading The Word?</h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <!-- Party platter request -->
+        <div class="reveal bg-ink rounded-3xl p-7 md:p-8 shadow-xl text-white flex flex-col">
+          <h3 class="font-heading font-extrabold text-xl mb-2">Request A Party Platter Quote</h3>
+          <p class="text-white/60 text-sm mb-6">Tell us the headcount and date. This opens a text straight to the truck, pre-filled and ready to send.</p>
+
+          <form id="party-form" class="space-y-3 flex-1">
+            <input type="text" name="name" required placeholder="Your name" aria-label="Your name" class="w-full bg-white/10 border border-white/15 rounded-xl px-4 py-3 text-sm placeholder:text-white/40 focus:outline-none focus:border-shrimp-400 transition-colors" />
+            <div class="grid grid-cols-2 gap-3">
+              <input type="date" name="date" required aria-label="Event date" class="w-full bg-white/10 border border-white/15 rounded-xl px-4 py-3 text-sm text-white/90 focus:outline-none focus:border-shrimp-400 transition-colors [color-scheme:dark]" />
+              <input type="number" name="headcount" required min="1" placeholder="Guests" aria-label="Number of guests" class="w-full bg-white/10 border border-white/15 rounded-xl px-4 py-3 text-sm placeholder:text-white/40 focus:outline-none focus:border-shrimp-400 transition-colors" />
+            </div>
+            <input type="tel" name="phone" placeholder="Callback number (optional)" aria-label="Callback phone number, optional" class="w-full bg-white/10 border border-white/15 rounded-xl px-4 py-3 text-sm placeholder:text-white/40 focus:outline-none focus:border-shrimp-400 transition-colors" />
+            <button type="submit" class="btn-pop w-full bg-shrimp-500 hover:bg-shrimp-600 text-white font-heading font-bold px-6 py-3.5 rounded-full shadow-lg shadow-shrimp-500/30 inline-flex items-center justify-center gap-2">
+              Text Us This Request
+              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+            </button>
+          </form>
+          <p id="party-form-status" class="hidden mt-3 text-sm text-lagoon-300"></p>
+          <p class="text-xs text-white/40 mt-4">Prefer to talk it through? Call <a href="tel:+18082931839" class="text-shrimp-400 hover:text-shrimp-300 font-semibold">(808) 293-1839</a> directly.</p>
+        </div>
+
+        <!-- Printable QR -->
+        <div class="reveal bg-white rounded-3xl p-7 md:p-8 shadow-xl flex flex-col items-center text-center">
+          <h3 class="font-heading font-extrabold text-xl mb-2">Put This In The Truck Window</h3>
+          <p class="text-ink/60 text-sm mb-6">A QR straight to the menu. Print it, tape it up, done.</p>
+          <div id="qr-print-card" class="bg-[#fffaf2] rounded-2xl p-6 flex flex-col items-center gap-3 mb-6">
+            <img src="/assets/emblem.png" alt="Giovanni's Shrimp Truck emblem" class="h-12 w-12 rounded-full object-cover" />
+            <canvas id="menu-qr" width="180" height="180"></canvas>
+            <p class="font-heading font-bold text-sm text-ink">Scan For The Menu</p>
+          </div>
+          <button id="print-qr-btn" type="button" class="btn-pop inline-flex items-center gap-2 bg-ink text-white font-heading font-bold text-sm px-6 py-3 rounded-full">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 9V3h12v6M6 18H4a1 1 0 0 1-1-1v-5a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1h-2M6 14h12v7H6z" /></svg>
+            Print This Card
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HISTORY TIMELINE -->
+  <section id="history" class="relative bg-[#fffaf2] py-24 md:py-32">
+    <div class="max-w-4xl mx-auto px-5 md:px-8">
+      <div class="reveal text-center mb-16">
+        <span data-i18n="eyebrow_history" class="font-heading font-bold text-shrimp-500 tracking-[0.25em] uppercase text-xs md:text-sm">Our History</span>
+        <h2 class="font-heading font-black text-3xl md:text-5xl mt-3">From One Truck to a North Shore Icon</h2>
+      </div>
+
+      <div class="relative pl-10 md:pl-0">
+        <div class="absolute left-4 md:left-1/2 top-0 bottom-0 w-1 -translate-x-1/2 bg-ink/10 rounded-full"></div>
+        <div class="timeline-line absolute left-4 md:left-1/2 top-0 bottom-0 w-1 -translate-x-1/2 bg-shrimp-500 rounded-full"></div>
+
+        <!-- item -->
+        <div class="tl-item reveal relative mb-14 md:grid md:grid-cols-2 md:gap-10">
+          <div class="md:text-right md:pr-10">
+            <span class="font-display text-shrimp-500 text-xl">1993</span>
+            <h3 class="font-heading font-bold text-lg mt-1 mb-2">The Beginning</h3>
+            <p class="text-ink/60 text-sm">Giovanni's started operating out of a converted 1953 bread truck, with just a handful of recipes and an entrepreneurial spirit driving the beloved truck around the North Shore.</p>
+          </div>
+          <div class="hidden md:block"></div>
+          <span class="absolute -left-6 md:left-1/2 top-1 h-4 w-4 rounded-full bg-shrimp-500 ring-4 ring-[#fffaf2] -translate-x-1/2"></span>
+        </div>
+
+        <div class="tl-item reveal relative mb-14 md:grid md:grid-cols-2 md:gap-10">
+          <div class="hidden md:block"></div>
+          <div class="md:pl-10">
+            <span class="font-display text-shrimp-500 text-xl">1996–1997</span>
+            <h3 class="font-heading font-bold text-lg mt-1 mb-2">Two Trucks, Two Towns</h3>
+            <p class="text-ink/60 text-sm">The truck parked for good on Kamehameha Highway in historic Kahuku. In 1997, a second truck opened in Haleiwa on what was then an overgrown field. It's now one of the busiest spots in town.</p>
+          </div>
+          <span class="absolute -left-6 md:left-1/2 top-1 h-4 w-4 rounded-full bg-shrimp-500 ring-4 ring-[#fffaf2] -translate-x-1/2"></span>
+        </div>
+
+        <div class="tl-item reveal relative mb-14 md:grid md:grid-cols-2 md:gap-10">
+          <div class="md:text-right md:pr-10">
+            <span class="font-display text-shrimp-500 text-xl">1999</span>
+            <h3 class="font-heading font-bold text-lg mt-1 mb-2">National Recognition</h3>
+            <p class="text-ink/60 text-sm">Giovanni's began entering national and international food show contests, winning multiple awards for the Hot &amp; Spicy sauce and the Scampi marinade.</p>
+          </div>
+          <div class="hidden md:block"></div>
+          <span class="absolute -left-6 md:left-1/2 top-1 h-4 w-4 rounded-full bg-shrimp-500 ring-4 ring-[#fffaf2] -translate-x-1/2"></span>
+        </div>
+
+        <div class="tl-item reveal relative mb-14 md:grid md:grid-cols-2 md:gap-10">
+          <div class="hidden md:block"></div>
+          <div class="md:pl-10">
+            <span class="font-display text-shrimp-500 text-xl">2001</span>
+            <h3 class="font-heading font-bold text-lg mt-1 mb-2">A New Truck</h3>
+            <p class="text-ink/60 text-sm">Word of mouth grew from locals and tourists alike, so much that the original truck was retired for a new one.</p>
+          </div>
+          <span class="absolute -left-6 md:left-1/2 top-1 h-4 w-4 rounded-full bg-shrimp-500 ring-4 ring-[#fffaf2] -translate-x-1/2"></span>
+        </div>
+
+        <div class="tl-item reveal relative md:grid md:grid-cols-2 md:gap-10">
+          <div class="md:text-right md:pr-10">
+            <span class="font-display text-shrimp-500 text-xl">2006–2010</span>
+            <h3 class="font-heading font-bold text-lg mt-1 mb-2">Putting Down Roots</h3>
+            <p class="text-ink/60 text-sm">Giovanni's became such a part of the community that the land the truck was parked on was purchased outright. By 2010, a pavilion was built so guests could enjoy their shrimp, the weather, and each other.</p>
+          </div>
+          <div class="hidden md:block"></div>
+          <span class="absolute -left-6 md:left-1/2 top-1 h-4 w-4 rounded-full bg-shrimp-500 ring-4 ring-[#fffaf2] -translate-x-1/2"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCATIONS -->
+  <section id="locations" class="relative bg-lagoon-900 py-24 md:py-32 grain overflow-hidden">
+    <div class="max-w-7xl mx-auto px-5 md:px-8">
+      <div class="reveal text-center max-w-2xl mx-auto mb-16">
+        <span data-i18n="eyebrow_locations" class="font-heading font-bold text-sun-400 tracking-[0.25em] uppercase text-xs md:text-sm">Find The Truck</span>
+        <h2 class="font-heading font-black text-3xl md:text-5xl text-white mt-3">Three Spots, One Aloha</h2>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+        <div class="menu-card bg-white/95 rounded-3xl overflow-hidden shadow-xl flex flex-col min-w-0" data-delay="0">
+          <iframe src="https://maps.google.com/maps?q=56-505+Kamehameha+Hwy+Kahuku+HI+96731&output=embed" class="w-full h-32 border-0" loading="lazy" title="Map to Giovanni's Kahuku location"></iframe>
+          <div class="p-6 md:p-7 flex flex-col flex-1">
+          <div class="flex items-start justify-between gap-2 mb-1">
+            <span class="inline-block text-[11px] font-bold tracking-widest text-shrimp-500 uppercase">Original Location</span>
+            <span class="live-status shrink-0 inline-flex items-center gap-1.5 text-[11px] font-bold px-2.5 py-1 rounded-full" data-open="10:30" data-close="18:30"></span>
+          </div>
+          <h3 class="font-heading font-extrabold text-xl mb-4">Kahuku</h3>
+          <div class="space-y-3 mb-6 flex-1">
+            <p class="flex items-start gap-2.5 text-sm text-ink/70 min-w-0">
+              <svg class="h-4 w-4 mt-0.5 text-lagoon-600 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21s-6.5-5.8-6.5-11A6.5 6.5 0 0 1 12 3.5 6.5 6.5 0 0 1 18.5 10c0 5.2-6.5 11-6.5 11Z" /><circle cx="12" cy="10" r="2.3" /></svg>
+              <span class="break-words">56-505 Kamehameha Hwy, Kahuku, HI 96731</span>
+            </p>
+            <p class="flex items-center gap-2.5 text-sm font-semibold text-ink">
+              <svg class="h-4 w-4 text-lagoon-600 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="8.5" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5V12l3 2" /></svg>
+              10:30 AM – 6:30 PM
+            </p>
+            <p class="flex items-center gap-2.5 text-sm text-ink/70">
+              <svg class="h-4 w-4 text-lagoon-600 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" d="M6.5 3.5h3l1.5 4-2 1.5c1 2.5 2.5 4 5 5l1.5-2 4 1.5v3c0 1-.8 1.8-1.8 1.7-6.5-.7-11.7-5.9-12.4-12.4C5 4.3 5.5 3.5 6.5 3.5Z" /></svg>
+              <a href="tel:+18082931839" class="hover:text-shrimp-600">(808) 293-1839</a>
+            </p>
+          </div>
+          <a href="https://www.google.com/maps/search/?api=1&query=56-505+Kamehameha+Hwy+Kahuku+HI+96731" target="_blank" rel="noopener" class="btn-pop inline-flex items-center gap-2 text-sm font-bold text-shrimp-600 hover:text-shrimp-700">
+            Get Directions
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+          </a>
+          </div>
+        </div>
+
+        <div class="menu-card bg-white/95 rounded-3xl overflow-hidden shadow-xl flex flex-col min-w-0" data-delay="150">
+          <iframe src="https://maps.google.com/maps?q=66-472+Kamehameha+Hwy+Haleiwa+HI+96712&output=embed" class="w-full h-32 border-0" loading="lazy" title="Map to Giovanni's Haleiwa location"></iframe>
+          <div class="p-6 md:p-7 flex flex-col flex-1">
+          <div class="flex items-start justify-between gap-2 mb-1">
+            <span class="inline-block text-[11px] font-bold tracking-widest text-shrimp-500 uppercase">Since 1997</span>
+            <span class="live-status shrink-0 inline-flex items-center gap-1.5 text-[11px] font-bold px-2.5 py-1 rounded-full" data-open="10:30" data-close="17:00"></span>
+          </div>
+          <h3 class="font-heading font-extrabold text-xl mb-4">Haleiwa</h3>
+          <div class="space-y-3 mb-6 flex-1">
+            <p class="flex items-start gap-2.5 text-sm text-ink/70 min-w-0">
+              <svg class="h-4 w-4 mt-0.5 text-lagoon-600 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21s-6.5-5.8-6.5-11A6.5 6.5 0 0 1 12 3.5 6.5 6.5 0 0 1 18.5 10c0 5.2-6.5 11-6.5 11Z" /><circle cx="12" cy="10" r="2.3" /></svg>
+              <span class="break-words">66-472 Kamehameha Hwy, Haleiwa, HI 96712</span>
+            </p>
+            <p class="flex items-center gap-2.5 text-sm font-semibold text-ink">
+              <svg class="h-4 w-4 text-lagoon-600 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="8.5" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5V12l3 2" /></svg>
+              10:30 AM – 5:00 PM
+            </p>
+          </div>
+          <a href="https://www.google.com/maps/search/?api=1&query=66-472+Kamehameha+Hwy+Haleiwa+HI+96712" target="_blank" rel="noopener" class="btn-pop inline-flex items-center gap-2 text-sm font-bold text-shrimp-600 hover:text-shrimp-700">
+            Get Directions
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+          </a>
+          </div>
+        </div>
+
+        <div class="menu-card bg-white/95 rounded-3xl overflow-hidden shadow-xl flex flex-col min-w-0 sm:col-span-2 lg:col-span-1" data-delay="300">
+          <iframe src="https://maps.google.com/maps?q=458+Keawe+St+Honolulu+HI+96813&output=embed" class="w-full h-32 border-0" loading="lazy" title="Map to Giovanni's Honolulu location"></iframe>
+          <div class="p-6 md:p-7 flex flex-col flex-1">
+          <span class="inline-block text-[11px] font-bold tracking-widest text-shrimp-500 uppercase mb-2">Now Open</span>
+          <h3 class="font-heading font-extrabold text-xl mb-4">Honolulu</h3>
+          <div class="space-y-3 mb-6 flex-1">
+            <p class="flex items-start gap-2.5 text-sm text-ink/70 min-w-0">
+              <svg class="h-4 w-4 mt-0.5 text-lagoon-600 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21s-6.5-5.8-6.5-11A6.5 6.5 0 0 1 12 3.5 6.5 6.5 0 0 1 18.5 10c0 5.2-6.5 11-6.5 11Z" /><circle cx="12" cy="10" r="2.3" /></svg>
+              <span class="break-words">458 Keawe St, 2nd Floor of H Mart, Honolulu, HI 96813</span>
+            </p>
+            <p class="flex items-center gap-2.5 text-sm font-semibold text-ink">
+              <svg class="h-4 w-4 text-lagoon-600 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path stroke-linecap="round" stroke-linejoin="round" d="M6.5 3.5h3l1.5 4-2 1.5c1 2.5 2.5 4 5 5l1.5-2 4 1.5v3c0 1-.8 1.8-1.8 1.7-6.5-.7-11.7-5.9-12.4-12.4C5 4.3 5.5 3.5 6.5 3.5Z" /></svg>
+              <a href="tel:+18082013980" class="hover:text-shrimp-600">(808) 201-3980</a>
+            </p>
+            <p class="text-xs text-ink/45">Hours vary, call ahead</p>
+          </div>
+          <a href="https://www.google.com/maps/search/?api=1&query=458+Keawe+St+Honolulu+HI+96813" target="_blank" rel="noopener" class="btn-pop inline-flex items-center gap-2 text-sm font-bold text-shrimp-600 hover:text-shrimp-700">
+            Get Directions
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+          </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section id="reviews" class="relative bg-[#fffaf2] py-24 md:py-32 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-5 md:px-8">
+      <div class="reveal text-center max-w-2xl mx-auto mb-16">
+        <span data-i18n="eyebrow_reviews" class="font-heading font-bold text-shrimp-500 tracking-[0.25em] uppercase text-xs md:text-sm">Real Guest Reviews</span>
+        <h2 class="font-heading font-black text-3xl md:text-5xl mt-3">Thousands Of Happy Shrimp Fans</h2>
+      </div>
+
+      <div class="grid sm:grid-cols-3 gap-6">
+        <a href="https://www.google.com/search?q=giovanni+shrimp+food+truck+google+review" target="_blank" rel="noopener" class="menu-card group bg-white rounded-3xl p-8 shadow-xl text-center flex flex-col items-center" data-delay="0">
+          <svg class="h-8 w-8 mb-3" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.99.66-2.26 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.85A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.84 14.09A6.6 6.6 0 0 1 5.5 12c0-.73.13-1.43.34-2.09V7.06H2.18A11 11 0 0 0 1 12c0 1.77.43 3.45 1.18 4.94l3.66-2.85z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1A11 11 0 0 0 2.18 7.06l3.66 2.85C6.71 7.31 9.14 5.38 12 5.38z"/></svg>
+          <div class="relative inline-block text-2xl tracking-widest text-ink/15 leading-none mb-2">
+            ★★★★★
+            <div class="absolute inset-0 overflow-hidden text-sun-500" style="width:88%">★★★★★</div>
+          </div>
+          <div class="font-display text-3xl text-ink" data-counter="4.4" data-decimals="1">0</div>
+          <p class="font-heading font-bold text-sm mt-1 mb-1">Google Reviews</p>
+          <p class="text-xs text-ink/50"><span data-counter="7750">0</span>+ reviews</p>
+          <span class="mt-4 text-xs font-bold text-shrimp-600 group-hover:text-shrimp-700 inline-flex items-center gap-1">Read Reviews
+            <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+          </span>
+        </a>
+
+        <a href="https://www.tripadvisor.com/Restaurant_Review-g60651-d807487-Reviews-Giovanni_s_Shrimp_Truck-Kahuku_Oahu_Hawaii.html" target="_blank" rel="noopener" class="menu-card group bg-white rounded-3xl p-8 shadow-xl text-center flex flex-col items-center" data-delay="150">
+          <svg class="h-8 w-8 mb-3" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="#34E0A1"/><circle cx="7.5" cy="13" r="3.4" fill="#fff"/><circle cx="16.5" cy="13" r="3.4" fill="#fff"/><circle cx="7.5" cy="13" r="1.6" fill="#000"/><circle cx="16.5" cy="13" r="1.6" fill="#000"/><path d="M9.5 8h5M4.5 9.5 7 7.5m12.5 2-2.5-2" stroke="#000" stroke-width="1" stroke-linecap="round"/></svg>
+          <div class="relative inline-block text-2xl tracking-widest text-ink/15 leading-none mb-2">
+            ★★★★★
+            <div class="absolute inset-0 overflow-hidden text-lagoon-500" style="width:84%">★★★★★</div>
+          </div>
+          <div class="font-display text-3xl text-ink" data-counter="4.2" data-decimals="1">0</div>
+          <p class="font-heading font-bold text-sm mt-1 mb-1">TripAdvisor</p>
+          <p class="text-xs text-ink/50"><span data-counter="1479">0</span>+ reviews</p>
+          <span class="mt-4 text-xs font-bold text-shrimp-600 group-hover:text-shrimp-700 inline-flex items-center gap-1">Read Reviews
+            <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+          </span>
+        </a>
+
+        <a href="https://www.yelp.com/search?find_desc=Giovanni%27s+Shrimp+Truck&find_loc=Kahuku%2C+HI" target="_blank" rel="noopener" class="menu-card group bg-white rounded-3xl p-8 shadow-xl text-center flex flex-col items-center" data-delay="300">
+          <svg class="h-8 w-8 mb-3" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#D32323"/><path fill="#fff" d="M11 6c0-.9.9-1.6 2-1.3l2.7.9c1 .3 1.4 1.5.8 2.3l-3.3 4.4c-.7.9-2.1.4-2.1-.7L11 6zm-1.8 6.4c.8-.6 2-.1 2.1.9l.3 4.6c.1 1.1-1.2 1.8-2.1 1.1l-2.2-1.7c-.8-.6-.8-1.8.1-2.4l1.8-2.5zm7.6 1.7c.9-.5 2 .2 1.9 1.2l-.3 2.9c-.1 1-1.3 1.5-2.1.8l-2.2-1.9c-.7-.6-.4-1.8.5-2.1l2.2-.9zM7 11.6c-1 .2-1.9-.7-1.5-1.7l1-2.7c.4-1 1.7-1.2 2.4-.4l1.9 2.2c.7.8.1 2-.9 2.1L7 11.6z"/></svg>
+          <div class="relative inline-block text-2xl tracking-widest text-ink/15 leading-none mb-2">
+            ★★★★★
+            <div class="absolute inset-0 overflow-hidden text-red-500" style="width:78%">★★★★★</div>
+          </div>
+          <div class="font-display text-3xl text-ink" data-counter="3.9" data-decimals="1">0</div>
+          <p class="font-heading font-bold text-sm mt-1 mb-1">Yelp</p>
+          <p class="text-xs text-ink/50"><span data-counter="5497">0</span>+ reviews</p>
+          <span class="mt-4 text-xs font-bold text-shrimp-600 group-hover:text-shrimp-700 inline-flex items-center gap-1">Read Reviews
+            <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- GUEST HIGHLIGHTS -->
+  <section id="highlights" class="relative bg-lagoon-900 py-24 md:py-32 grain overflow-hidden">
+    <div class="max-w-6xl mx-auto px-5 md:px-8">
+      <div class="reveal text-center max-w-2xl mx-auto mb-16">
+        <span class="font-heading font-bold text-sun-400 tracking-[0.25em] uppercase text-xs md:text-sm">What People Notice</span>
+        <h2 class="font-heading font-black text-3xl md:text-5xl text-white mt-3">Straight From The Reviews</h2>
+        <p class="text-white/60 mt-4 text-sm md:text-base">A quick read of the patterns across thousands of real Google, Yelp &amp; TripAdvisor reviews. Tap any card for the source.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <button type="button" class="highlight-card menu-card group text-left bg-white/95 rounded-3xl p-7 shadow-xl" data-delay="0"
+          data-platform="Google" data-link="https://www.google.com/search?q=giovanni+shrimp+food+truck+google+review"
+          data-body="Reviewers consistently call out the heavy, well-charred garlic on the scampi as the signature flavor, and note the line moves quickly even when it's long.">
+          <svg class="h-7 w-7 mb-4" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.99.66-2.26 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.85A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.84 14.09A6.6 6.6 0 0 1 5.5 12c0-.73.13-1.43.34-2.09V7.06H2.18A11 11 0 0 0 1 12c0 1.77.43 3.45 1.18 4.94l3.66-2.85z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1A11 11 0 0 0 2.18 7.06l3.66 2.85C6.71 7.31 9.14 5.38 12 5.38z"/></svg>
+          <p class="font-heading font-bold text-sm text-shrimp-500 uppercase tracking-wide mb-2">Most mentioned</p>
+          <p class="text-ink/70 text-sm leading-relaxed mb-4">The heavy, well-charred garlic on the scampi comes up again and again, along with how quickly the line actually moves.</p>
+          <span class="text-xs font-bold text-shrimp-600 group-hover:text-shrimp-700 inline-flex items-center gap-1">See on Google
+            <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+          </span>
+        </button>
+
+        <button type="button" class="highlight-card menu-card group text-left bg-white/95 rounded-3xl p-7 shadow-xl" data-delay="150"
+          data-platform="Yelp" data-link="https://www.yelp.com/search?find_desc=Giovanni%27s+Shrimp+Truck&find_loc=Kahuku%2C+HI"
+          data-body="&#8220;A must-visit for anyone craving local flavor and island vibes.&#8221;" data-quote="true">
+          <svg class="h-7 w-7 mb-4" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#D32323"/><path fill="#fff" d="M11 6c0-.9.9-1.6 2-1.3l2.7.9c1 .3 1.4 1.5.8 2.3l-3.3 4.4c-.7.9-2.1.4-2.1-.7L11 6zm-1.8 6.4c.8-.6 2-.1 2.1.9l.3 4.6c.1 1.1-1.2 1.8-2.1 1.1l-2.2-1.7c-.8-.6-.8-1.8.1-2.4l1.8-2.5zm7.6 1.7c.9-.5 2 .2 1.9 1.2l-.3 2.9c-.1 1-1.3 1.5-2.1.8l-2.2-1.9c-.7-.6-.4-1.8.5-2.1l2.2-.9zM7 11.6c-1 .2-1.9-.7-1.5-1.7l1-2.7c.4-1 1.7-1.2 2.4-.4l1.9 2.2c.7.8.1 2-.9 2.1L7 11.6z"/></svg>
+          <p class="font-heading font-bold text-sm text-shrimp-500 uppercase tracking-wide mb-2">Straight from a review</p>
+          <p class="text-ink/70 text-sm leading-relaxed mb-4 italic">&#8220;A must-visit for anyone craving local flavor and island vibes.&#8221;</p>
+          <span class="text-xs font-bold text-shrimp-600 group-hover:text-shrimp-700 inline-flex items-center gap-1">See on Yelp
+            <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+          </span>
+        </button>
+
+        <button type="button" class="highlight-card menu-card group text-left bg-white/95 rounded-3xl p-7 shadow-xl" data-delay="300"
+          data-platform="TripAdvisor" data-link="https://www.tripadvisor.com/Restaurant_Review-g60651-d807487-Reviews-Giovanni_s_Shrimp_Truck-Kahuku_Oahu_Hawaii.html"
+          data-body="Travelers planning a North Shore day trip often flag Giovanni's as a required stop, right alongside the drive to Waimea Bay and Shark's Cove.">
+          <svg class="h-7 w-7 mb-4" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="#34E0A1"/><circle cx="7.5" cy="13" r="3.4" fill="#fff"/><circle cx="16.5" cy="13" r="3.4" fill="#fff"/><circle cx="7.5" cy="13" r="1.6" fill="#000"/><circle cx="16.5" cy="13" r="1.6" fill="#000"/><path d="M9.5 8h5M4.5 9.5 7 7.5m12.5 2-2.5-2" stroke="#000" stroke-width="1" stroke-linecap="round"/></svg>
+          <p class="font-heading font-bold text-sm text-shrimp-500 uppercase tracking-wide mb-2">A North Shore staple</p>
+          <p class="text-ink/70 text-sm leading-relaxed mb-4">Travelers planning a North Shore day trip often list this as a required stop alongside Waimea Bay and Shark's Cove.</p>
+          <span class="text-xs font-bold text-shrimp-600 group-hover:text-shrimp-700 inline-flex items-center gap-1">See on TripAdvisor
+            <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+          </span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Highlight popup modal -->
+  <div id="highlight-modal" class="hidden fixed inset-0 z-[90] flex items-center justify-center px-5">
+    <div id="highlight-modal-backdrop" class="absolute inset-0 bg-ink/80 backdrop-blur-sm"></div>
+    <div id="highlight-modal-card" class="relative bg-[#fffaf2] rounded-3xl p-8 max-w-md w-full shadow-2xl">
+      <button id="highlight-modal-close" aria-label="Close" class="absolute top-4 right-4 text-ink/40 hover:text-ink transition-colors">
+        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18" /></svg>
+      </button>
+      <p id="highlight-modal-platform" class="font-heading font-bold text-xs uppercase tracking-widest text-shrimp-500 mb-3"></p>
+      <p id="highlight-modal-body" class="text-ink text-lg leading-relaxed mb-6"></p>
+      <a id="highlight-modal-link" href="#" target="_blank" rel="noopener" class="btn-pop inline-flex items-center gap-2 bg-ink text-white font-heading font-bold text-sm px-5 py-2.5 rounded-full">
+        Read It On The Source
+        <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- INSTAGRAM -->
+  <section id="instagram" class="relative bg-ink py-20 md:py-28 grain overflow-hidden">
+    <div class="max-w-5xl mx-auto px-5 md:px-8">
+      <div class="reveal flex items-end justify-between flex-wrap gap-6 mb-8">
+        <div>
+          <span class="font-heading font-bold text-sun-400 tracking-[0.25em] uppercase text-xs md:text-sm">@giovannisshrimptruck</span>
+          <h2 class="font-heading font-black text-2xl md:text-4xl text-white mt-3">Follow The Feed</h2>
+        </div>
+        <a href="https://www.instagram.com/giovannisshrimptruck/" target="_blank" rel="noopener" class="btn-pop inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-heading font-bold text-sm px-5 py-2.5 rounded-full border border-white/20 backdrop-blur">
+          <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 2 .3 2.4.5.6.2 1 .5 1.5 1 .4.4.7.9 1 1.5.2.4.4 1.2.5 2.4.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 2-.5 2.4-.2.6-.5 1-1 1.5-.4.4-.9.7-1.5 1-.4.2-1.2.4-2.4.5-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-2-.3-2.4-.5-.6-.2-1-.5-1.5-1-.4-.4-.7-.9-1-1.5-.2-.4-.4-1.2-.5-2.4C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-2 .5-2.4.2-.6.5-1 1-1.5.4-.4.9-.7 1.5-1 .4-.2 1.2-.4 2.4-.5C8.4 2.2 8.8 2.2 12 2.2Zm0 1.8c-3.1 0-3.5 0-4.7.1-1 .1-1.6.2-1.9.4-.5.2-.8.4-1.2.7-.3.3-.5.6-.7 1.1-.2.3-.3.9-.4 1.9-.1 1.2-.1 1.6-.1 4.7s0 3.5.1 4.7c.1 1 .2 1.6.4 1.9.2.5.4.8.7 1.1.3.3.7.6 1.2.7.3.2.9.3 1.9.4 1.2.1 1.6.1 4.7.1s3.5 0 4.7-.1c1-.1 1.6-.2 1.9-.4.5-.2.8-.4 1.2-.7.3-.3.5-.6.7-1.1.2-.3.3-.9.4-1.9.1-1.2.1-1.6.1-4.7s0-3.5-.1-4.7c-.1-1-.2-1.6-.4-1.9-.2-.5-.4-.8-.7-1.2-.3-.3-.7-.5-1.2-.7-.3-.2-.9-.3-1.9-.4-1.2-.1-1.6-.1-4.7-.1Zm0 3.5a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9Zm0 1.8a2.7 2.7 0 1 0 0 5.4 2.7 2.7 0 0 0 0-5.4Zm5.7-2a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0Z"/></svg>
+          <span><span data-counter="17">0</span>K Followers</span>
+        </a>
+      </div>
+
+      <div class="reveal grid grid-cols-3 gap-2 md:gap-3 rounded-3xl overflow-hidden">
+        <div class="ig-tile aspect-square bg-gradient-to-br from-shrimp-500 to-sun-500 flex items-center justify-center transition-transform duration-500 hover:scale-105">
+          <svg class="h-7 w-7 md:h-9 md:w-9 text-white/90" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="7.5" /><circle cx="12" cy="12" r="2.8" opacity=".6" /></svg>
+        </div>
+        <div class="ig-tile aspect-square bg-gradient-to-br from-lagoon-500 to-lagoon-700 flex items-center justify-center transition-transform duration-500 hover:scale-105">
+          <svg class="h-7 w-7 md:h-9 md:w-9 text-white/90" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21V12" /><path d="M12 12c-3-4-7-4-9-2 3 2 6 2 9 2Z" /><path d="M12 12c3-4 7-4 9-2-3 2-6 2-9 2Z" /><path d="M12 12c-1-4 1-7 3-9" /><path d="M12 12c1-4-1-7-3-9" /></svg>
+        </div>
+        <div class="ig-tile aspect-square bg-gradient-to-br from-sun-400 to-shrimp-600 flex items-center justify-center transition-transform duration-500 hover:scale-105">
+          <svg class="h-7 w-7 md:h-9 md:w-9 text-white/90" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 16V7a1 1 0 0 1 1-1h8v10" /><path d="M12 10h4l3 3v3" /><circle cx="7" cy="18" r="1.6" /><circle cx="16.5" cy="18" r="1.6" /></svg>
+        </div>
+        <div class="ig-tile aspect-square bg-gradient-to-br from-shrimp-700 to-ink flex items-center justify-center transition-transform duration-500 hover:scale-105">
+          <svg class="h-7 w-7 md:h-9 md:w-9 text-white/90" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none" /><path d="M12 10.4c-1-2-.6-4 .8-5 1 2 .6 4-.8 5Z" /><path d="M13.6 12c2-1 4-.6 5 .8-2 1-4 .6-5-.8Z" /><path d="M12 13.6c1 2 .6 4-.8 5-1-2-.6-4 .8-5Z" /><path d="M10.4 12c-2 1-4 .6-5-.8 2-1 4-.6 5 .8Z" /></svg>
+        </div>
+        <div class="ig-tile relative aspect-square bg-gradient-to-br from-lagoon-600 to-shrimp-500 flex items-center justify-center transition-transform duration-500 hover:scale-105">
+          <a href="https://www.instagram.com/giovannisshrimptruck/" target="_blank" rel="noopener" class="absolute inset-0 flex flex-col items-center justify-center gap-1 bg-ink/60 hover:bg-ink/40 transition-colors text-white text-center px-2">
+            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 2 .3 2.4.5.6.2 1 .5 1.5 1 .4.4.7.9 1 1.5.2.4.4 1.2.5 2.4.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 2-.5 2.4-.2.6-.5 1-1 1.5-.4.4-.9.7-1.5 1-.4.2-1.2.4-2.4.5-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-2-.3-2.4-.5-.6-.2-1-.5-1.5-1-.4-.4-.7-.9-1-1.5-.2-.4-.4-1.2-.5-2.4C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-2 .5-2.4.2-.6.5-1 1-1.5.4-.4.9-.7 1.5-1 .4-.2 1.2-.4 2.4-.5C8.4 2.2 8.8 2.2 12 2.2Z"/></svg>
+            <span class="text-[10px] md:text-xs font-bold">Visit Instagram</span>
+          </a>
+        </div>
+        <div class="ig-tile aspect-square bg-gradient-to-br from-sun-500 to-lagoon-500 flex items-center justify-center transition-transform duration-500 hover:scale-105">
+          <svg class="h-7 w-7 md:h-9 md:w-9 text-white/90" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.5-9-9c-1.5-3.5 1-6.5 4-6.5 2 0 3.5 1.2 5 3 1.5-1.8 3-3 5-3 3 0 5.5 3 4 6.5-2 4.5-9 9-9 9Z" /></svg>
+        </div>
+        <div class="ig-tile aspect-square bg-gradient-to-br from-shrimp-600 to-sun-400 flex items-center justify-center transition-transform duration-500 hover:scale-105">
+          <svg class="h-7 w-7 md:h-9 md:w-9 text-white/90" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2" /><path stroke-linecap="round" d="M12 3v2.2M12 18.8V21M4.2 12H2M22 12h-2.2M5.6 5.6l1.6 1.6M16.8 16.8l1.6 1.6M18.4 5.6l-1.6 1.6M7.2 16.8l-1.6 1.6" /></svg>
+        </div>
+        <div class="ig-tile aspect-square bg-gradient-to-br from-lagoon-700 to-ink flex items-center justify-center transition-transform duration-500 hover:scale-105">
+          <svg class="h-7 w-7 md:h-9 md:w-9 text-white/90" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8c2-1.5 4-1.5 6 0s4 1.5 6 0 4-1.5 6 0" /><path d="M3 13c2-1.5 4-1.5 6 0s4 1.5 6 0 4-1.5 6 0" /><path d="M3 18c2-1.5 4-1.5 6 0s4 1.5 6 0 4-1.5 6 0" /></svg>
+        </div>
+        <div class="ig-tile aspect-square bg-gradient-to-br from-shrimp-500 to-lagoon-600 flex items-center justify-center transition-transform duration-500 hover:scale-105">
+          <svg class="h-7 w-7 md:h-9 md:w-9 text-white/90" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z" /><path d="M3 21c2.5-1.6 5-1.6 7.5 0s5 1.6 7.5 0" opacity=".55" /></svg>
+        </div>
+      </div>
+      <p class="reveal text-center text-white/40 text-xs mt-5">Live feed template. Connect to the Instagram Graph API before launch to pull real posts automatically.</p>
+    </div>
+  </section>
+
+  <!-- PRESS -->
+  <section id="press" class="bg-[#fffaf2] py-20 md:py-28">
+    <div class="max-w-7xl mx-auto px-5 md:px-8">
+      <div class="reveal text-center mb-12">
+        <span data-i18n="eyebrow_press" class="font-heading font-bold text-shrimp-500 tracking-[0.25em] uppercase text-xs md:text-sm">As Seen In</span>
+        <h2 class="font-heading font-black text-2xl md:text-4xl mt-3">Loved Far Beyond The North Shore</h2>
+      </div>
+      <div class="reveal flex flex-wrap justify-center items-center gap-x-12 gap-y-6 text-ink/40 font-heading font-extrabold text-lg md:text-2xl uppercase tracking-wide">
+        <span class="hover:text-ink transition-colors cursor-default">Hawaii News Now</span>
+        <span class="hover:text-ink transition-colors cursor-default">BuzzFeed</span>
+        <span class="hover:text-ink transition-colors cursor-default">Bizarre Foods</span>
+        <span class="hover:text-ink transition-colors cursor-default">Saveur</span>
+        <span class="hover:text-ink transition-colors cursor-default">Hawaii Magazine</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- UPGRADE PITCH -->
+  <section class="bg-ink py-24 md:py-32 grain overflow-hidden">
+    <div class="max-w-7xl mx-auto px-5 md:px-8 grid md:grid-cols-2 gap-14 items-center">
+      <div class="reveal order-2 md:order-1">
+        <div class="rounded-2xl overflow-hidden border border-white/10 shadow-2xl -rotate-2">
+          <div class="bg-white/10 px-4 py-2 flex items-center gap-1.5">
+            <span class="h-2.5 w-2.5 rounded-full bg-white/30"></span>
+            <span class="h-2.5 w-2.5 rounded-full bg-white/30"></span>
+            <span class="h-2.5 w-2.5 rounded-full bg-white/30"></span>
+            <span class="ml-3 text-[10px] text-white/40 font-mono">giovannisshrimptruck.com (2010s)</span>
+          </div>
+          <img src="/assets/old-site.png" alt="Previous Giovanni's website homepage" class="w-full grayscale opacity-70" />
+        </div>
+        <a href="https://giovannisshrimptruck.com" target="_blank" rel="noopener" class="mt-3 inline-flex items-center gap-1.5 text-xs text-white/40 hover:text-white/70 transition-colors">
+          The current site is still live at giovannisshrimptruck.com
+          <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+        </a>
+      </div>
+      <div class="reveal order-1 md:order-2">
+        <span class="font-heading font-bold text-sun-400 tracking-[0.25em] uppercase text-xs md:text-sm">The Upgrade</span>
+        <h2 class="font-heading font-black text-3xl md:text-5xl text-white mt-3 mb-5">Same Truck. New Engine.</h2>
+        <p class="text-white/60 text-sm md:text-base leading-relaxed mb-8">
+          Nothing here was made up. This page pulls your real menu, prices, hours, and addresses straight from your current listings, and pulls your live star ratings from Google, Yelp, and TripAdvisor instead of printing them once and hoping they stay accurate.
+        </p>
+        <div class="grid grid-cols-2 gap-3 sm:gap-4">
+          <div class="rounded-2xl bg-white/5 border border-white/10 p-4">
+            <svg class="h-5 w-5 text-lagoon-400 mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2.5" /><path d="M11 18h2" /></svg>
+            <p class="text-white text-sm font-semibold">One page, every screen</p>
+            <p class="text-white/50 text-xs mt-1">Same layout logic from a phone at the truck window to a laptop at home.</p>
+          </div>
+          <div class="rounded-2xl bg-white/5 border border-white/10 p-4">
+            <svg class="h-5 w-5 text-lagoon-400 mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7.5" /><path stroke-linecap="round" d="M21 21l-4.3-4.3" /></svg>
+            <p class="text-white text-sm font-semibold">Reviews stay live</p>
+            <p class="text-white/50 text-xs mt-1">Google, Yelp &amp; TripAdvisor ratings link out to the real, current pages.</p>
+          </div>
+          <div class="rounded-2xl bg-white/5 border border-white/10 p-4">
+            <svg class="h-5 w-5 text-lagoon-400 mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke-linecap="round" stroke-linejoin="round" d="M4 19V6a1 1 0 0 1 1-1h9l6 6v8a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M14 5v5h6" /></svg>
+            <p class="text-white text-sm font-semibold">Plain HTML/CSS/JS</p>
+            <p class="text-white/50 text-xs mt-1">No proprietary builder. Any developer can open and edit it.</p>
+          </div>
+          <div class="rounded-2xl bg-white/5 border border-white/10 p-4">
+            <svg class="h-5 w-5 text-lagoon-400 mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12h4l3-8 4 16 3-8h4" /></svg>
+            <p class="text-white text-sm font-semibold">Same domain, same rankings</p>
+            <p class="text-white/50 text-xs mt-1">Drops onto giovannisshrimptruck.com with no traffic or SEO reset.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="relative bg-shrimp-500 py-20 grain overflow-hidden">
+    <div class="max-w-4xl mx-auto px-5 md:px-8 text-center reveal">
+      <h2 data-i18n="cta_hungry" class="font-display text-3xl md:text-5xl text-ink mb-4">HUNGRY YET?</h2>
+      <p class="text-ink/80 font-semibold mb-8">Find your nearest truck and grab a plate today.</p>
+      <a href="#locations" data-i18n="cta_find" class="btn-pop inline-flex items-center gap-2 bg-ink text-white font-heading font-bold px-8 py-4 rounded-full shadow-xl">
+        Find a Truck Near You
+      </a>
+    </div>
+  </section>
+
+  <!-- TEXT ALERTS (concept) -->
+  <section class="bg-lagoon-900 py-16 md:py-20">
+    <div class="max-w-2xl mx-auto px-5 md:px-8 text-center reveal">
+      <h2 class="font-heading font-black text-2xl md:text-3xl text-white mb-2">Never Miss The Truck</h2>
+      <p class="text-white/60 text-sm mb-6">Get a text if a location changes or the shrimp sells out early.</p>
+      <form id="alert-form" class="flex flex-col sm:flex-row gap-3 justify-center">
+        <input type="tel" name="phone" required placeholder="Your phone number" aria-label="Your phone number" class="w-full sm:w-64 bg-white/10 border border-white/15 rounded-full px-5 py-3 text-sm text-white placeholder:text-white/40 focus:outline-none focus:border-sun-400 transition-colors" />
+        <button type="submit" class="btn-pop shrink-0 bg-sun-500 hover:bg-sun-600 text-ink font-heading font-bold px-6 py-3 rounded-full">Text Me Updates</button>
+      </form>
+      <p id="alert-form-status" class="hidden mt-3 text-sm text-sun-300"></p>
+      <p class="text-white/30 text-xs mt-4">Preview only. Connect to a service like Twilio or SimpleTexting before launch to send real alerts.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-ink border-t border-white/10 pt-16 pb-8">
+    <div class="max-w-7xl mx-auto px-5 md:px-8">
+      <div class="grid md:grid-cols-4 gap-10 mb-12">
+        <div>
+          <div class="flex items-center gap-3 mb-4">
+            <img src="/assets/emblem.png" alt="Giovanni's Shrimp Truck emblem" class="h-10 w-10 rounded-full object-cover" />
+            <span class="font-heading font-extrabold text-white">GIOVANNI'S</span>
+          </div>
+          <p class="text-white/50 text-sm">North Shore, O'ahu · Est. 1993</p>
+        </div>
+        <div>
+          <h4 class="font-heading font-bold text-white mb-3 text-sm tracking-wide uppercase">Explore</h4>
+          <ul class="space-y-2 text-sm text-white/60">
+            <li><a href="#menu" class="hover:text-sun-400">Menu</a></li>
+            <li><a href="#history" class="hover:text-sun-400">History</a></li>
+            <li><a href="#locations" class="hover:text-sun-400">Locations</a></li>
+            <li><a href="#press" class="hover:text-sun-400">Press</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-heading font-bold text-white mb-3 text-sm tracking-wide uppercase">Contact</h4>
+          <ul class="space-y-2 text-sm text-white/60">
+            <li>Party Platters: <a href="tel:+18082931839" class="hover:text-sun-400">(808) 293-1839</a></li>
+            <li>Honolulu: <a href="tel:+18082013980" class="hover:text-sun-400">(808) 201-3980</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-heading font-bold text-white mb-3 text-sm tracking-wide uppercase">Follow</h4>
+          <div class="flex gap-3">
+            <a href="#" class="h-9 w-9 rounded-full bg-white/90 hover:bg-white flex items-center justify-center transition-colors" aria-label="Facebook">
+              <img src="/assets/social/facebook.svg" alt="" class="h-4 w-4" />
+            </a>
+            <a href="https://www.instagram.com/giovannisshrimptruck/" target="_blank" rel="noopener" class="h-9 w-9 rounded-full bg-white/90 hover:bg-white flex items-center justify-center transition-colors" aria-label="Instagram">
+              <img src="/assets/social/instagram.svg" alt="" class="h-4 w-4" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-white/10 pt-6 flex flex-col md:flex-row justify-between gap-2 text-xs text-white/40">
+        <p>&copy; 2026 Giovanni's Shrimp Truck. Concept redesign for pitch purposes.</p>
+        <p>Menu, hours &amp; addresses are sourced from current public listings. Confirm before launch.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,168 @@
+{
+  "items": [
+    {
+      "id": "scampi",
+      "image": "/assets/scampi.png",
+      "price": "$15",
+      "badgeColor": "shrimp",
+      "name": {
+        "en": "Shrimp Scampi", "es": "Camarones Scampi", "vi": "Tôm Scampi", "zh-CN": "蒜香虾", "yue": "蒜香蝦",
+        "de": "Shrimp Scampi", "ko": "쉬림프 스캠피", "ja": "シュリンプスキャンピ", "tl": "Shrimp Scampi", "fr": "Crevettes Scampi"
+      },
+      "description": {
+        "en": "Garlicky, buttery, and world-famous. Marinated in olive oil, fresh chopped garlic, and lemon.",
+        "es": "Con ajo, mantequilla y fama mundial. Marinados en aceite de oliva, ajo fresco picado y limón.",
+        "vi": "Đậm vị tỏi, béo bơ, và nổi tiếng khắp thế giới. Ướp trong dầu ô liu, tỏi băm tươi và chanh.",
+        "zh-CN": "浓郁蒜香黄油味，享誉世界。用橄榄油、新鲜蒜末和柠檬腌制。",
+        "yue": "蒜香牛油味，馳名國際。用橄欖油、新鮮蒜蓉同檬檬腌製。",
+        "de": "Nach Knoblauch und Butter, weltbekannt. Mariniert in Olivenöl, frischem Knoblauch und Zitrone.",
+        "ko": "마늘과 버터 향 가득, 세계적으로 유명한 메뉴. 올리브 오일, 다진 마늘, 레몬으로 양념.",
+        "ja": "ガーリックとバターの香り、世界的に有名。オリーブオイル、刻んだ新鮮なガーリック、レモンでマリネ。",
+        "tl": "Mabango sa bawang at mantikilya, sikat sa buong mundo. Naka-marinate sa olive oil, sariwang tinadtad na bawang, at lemon.",
+        "fr": "Ail, beurre et renommée mondiale. Mariné dans l'huile d'olive, l'ail frais haché et le citron."
+      },
+      "badge": {
+        "en": "Signature", "es": "Especialidad", "vi": "Đặc Trưng", "zh-CN": "招牌", "yue": "招牌",
+        "de": "Spezialität", "ko": "시그니처", "ja": "看板メニュー", "tl": "Signature", "fr": "Signature"
+      }
+    },
+    {
+      "id": "spicy",
+      "icon": "chili",
+      "price": "$15",
+      "badgeColor": "red",
+      "name": {
+        "en": "“No Refunds” Hot & Spicy", "es": "Picante “Sin Reembolsos”", "vi": "Tôm Cay “Không Hoàn Tiền”",
+        "zh-CN": "「不退款」香辣虾", "yue": "「唔退錢」香辣蝦", "de": "“Keine Rückgabe” Scharf", "ko": "“환불 불가” 핫 앤 스파이시",
+        "ja": "「返金なし」ホット＆スパイシー", "tl": "“Walang Refund” Hot & Spicy", "fr": "“Sans Remboursement” Épicé"
+      },
+      "description": {
+        "en": "Shell-on shrimp tossed in a fiery red sauce. Consider yourself warned: it lives up to the name.",
+        "es": "Camarones con cáscara en una salsa roja ardiente. Considérate advertido: hace honor a su nombre.",
+        "vi": "Tôm còn vỏ trộn trong sốt đỏ cay nồng. Đã báo trước rồi đó, tên gọi không nói suông.",
+        "zh-CN": "带壳虾拌入火辣红酱。提前警告你，这名字可不是随便叫的。",
+        "yue": "帶殼蝦拌入火辣紅醬。事先警告你，呢個名唔係亂噏嘅。",
+        "de": "Garnelen mit Schale in feuriger roter Sauce. Sei gewarnt: der Name ist Programm.",
+        "ko": "껍질 그대로 매운 레드 소스에 버무린 새우. 미리 경고합니다, 이름값 제대로 합니다.",
+        "ja": "殻付きエビを燃えるような赤いソースで。警告済み、その名に恥じない辛さです。",
+        "tl": "Hipong may balat na hinalo sa maanghang na pulang sarsa. Sinabi na, bagay talaga sa pangalan niya.",
+        "fr": "Crevettes en coquille dans une sauce rouge ardente. Vous êtes prévenu, le nom ne trompe pas."
+      },
+      "badge": {
+        "en": "Spicy", "es": "Picante", "vi": "Cay", "zh-CN": "辛辣", "yue": "辛辣",
+        "de": "Scharf", "ko": "매운맛", "ja": "辛口", "tl": "Maanghang", "fr": "Épicé"
+      }
+    },
+    {
+      "id": "lemon",
+      "icon": "lemon",
+      "price": "$15",
+      "badgeColor": "lagoon",
+      "name": {
+        "en": "Lemon Butter Shrimp", "es": "Camarones Mantequilla y Limón", "vi": "Tôm Bơ Chanh", "zh-CN": "柠檬黄油虾", "yue": "檬檬牛油蝦",
+        "de": "Zitronen-Butter-Garnelen", "ko": "레몬 버터 쉬림프", "ja": "レモンバターシュリンプ", "tl": "Lemon Butter Shrimp", "fr": "Crevettes au Beurre Citronné"
+      },
+      "description": {
+        "en": "Shell-on shrimp in a bright, creamy lemon-butter sauce. Simple, and always a favorite.",
+        "es": "Camarones con cáscara en una salsa cremosa de mantequilla y limón. Simple y siempre un favorito.",
+        "vi": "Tôm còn vỏ trong sốt bơ chanh béo mịn. Đơn giản mà lúc nào cũng được yêu thích.",
+        "zh-CN": "带壳虾配清新柔滑的柠檬黄油酱。简单却始料常胜。",
+        "yue": "帶殼蝦配清新滑溜嘅檬檬牛油醬。簡單但一直好受歡迎。",
+        "de": "Garnelen mit Schale in einer frischen, cremigen Zitronen-Butter-Sauce. Einfach und immer beliebt.",
+        "ko": "껍질 그대로 상큼하고 부드러운 레몬 버터 소스에. 심플하지만 늘 인기 만점.",
+        "ja": "殻付きエビを爽やかでクリーミーなレモンバターソースで。シンプルながら常に人気。",
+        "tl": "Hipong may balat sa presko at malasang lemon butter sauce. Simple pero laging paborito.",
+        "fr": "Crevettes en coquille dans une sauce citron-beurre onctueuse. Simple et toujours plébiscité."
+      },
+      "badge": {
+        "en": "Fan Favorite", "es": "Favorito", "vi": "Được Yêu Thích", "zh-CN": "人气之选", "yue": "人氣之選",
+        "de": "Publikumsliebling", "ko": "인기 메뉴", "ja": "人気メニュー", "tl": "Paboritong Panlasa", "fr": "Coup de Cœur"
+      }
+    },
+    {
+      "id": "hotdog",
+      "icon": "hotdog",
+      "price": "$5",
+      "badgeColor": "sun",
+      "name": {
+        "en": "Jumbo Garlic Hot Dog", "es": "Hot Dog de Ajo Jumbo", "vi": "Hot Dog Tỏi Cỡ Lớn", "zh-CN": "特大蒜香热狗", "yue": "特大蒜香熱狗",
+        "de": "Jumbo Knoblauch-Hotdog", "ko": "점보 갈릭 핫도그", "ja": "ジャンボガーリックホットドッグ", "tl": "Jumbo Garlic Hot Dog", "fr": "Hot-Dog À L'Ail Géant"
+      },
+      "description": {
+        "en": "Plump aloha dog, smothered in our famous scampi sauce and served with two scoops of rice.",
+        "es": "Un jugoso hot dog bañado en nuestra famosa salsa scampi y servido con dos porciones de arroz.",
+        "vi": "Chiếc hot dog căng mọng, phủ đầy sốt scampi nổi tiếng, ăn cùng hai phần cơm.",
+        "zh-CN": "饱满热狗，裹满招牌蒜香酱，配两份米饭。",
+        "yue": "飽滿熱狗，裹滿招牌蒜香醬，配兩份米飯。",
+        "de": "Ein prallgefüllter Hotdog, übergossen mit unserer berühmten Scampi-Sauce, dazu zwei Portionen Reis.",
+        "ko": "통통한 핫도그에 유명한 스캠피 소스를 듬뿍, 밥 두 스쿱과 함께 제공.",
+        "ja": "ぷりぷりのホットドッグに名物スキャンピソースをたっぷりかけ、ライス2スクープ添え。",
+        "tl": "Malusog na hot dog na binuhusan ng aming sikat na scampi sauce, may dalawang kutsara ng kanin.",
+        "fr": "Un hot-dog bien dodu, nappé de notre fameuse sauce scampi, servi avec deux portions de riz."
+      },
+      "badge": {
+        "en": "Local Favorite", "es": "Favorito Local", "vi": "Được Dân Địa Phương Yêu Thích", "zh-CN": "本地人气", "yue": "本地人氣",
+        "de": "Lokaler Favorit", "ko": "현지인 인기", "ja": "地元の人気メニュー", "tl": "Paborito Ng Lokal", "fr": "Favori Local"
+      }
+    }
+  ],
+  "sidesHeading": {
+    "en": "Sides & Half Plates", "es": "Acompañamientos y Medios Platos", "vi": "Món Phụ & Phần Nửa", "zh-CN": "配菜与半份餐盘", "yue": "配菜同半份餐盤",
+    "de": "Beilagen & Halbe Portionen", "ko": "사이드 & 하프 플레이트", "ja": "サイドメニュー＆ハーフプレート", "tl": "Mga Side Dish & Half Plate", "fr": "Accompagnements & Demi-Portions"
+  },
+  "sides": [
+    {
+      "price": "$8",
+      "name": {
+        "en": "Half Plate (6 shrimp, 1 rice)", "es": "Medio Plato (6 camarones, 1 arroz)", "vi": "Phần Nửa (6 tôm, 1 cơm)", "zh-CN": "半份餐盘（6只虾，1份米饭）", "yue": "半份餐盤（6隻蝦，1份米飯）",
+        "de": "Halbe Portion (6 Garnelen, 1 Reis)", "ko": "하프 플레이트 (새우 6개, 밥 1스쿱)", "ja": "ハーフプレート（エビ6尾、ライス1スクープ）", "tl": "Half Plate (6 hipon, 1 kanin)", "fr": "Demi-Portion (6 crevettes, 1 riz)"
+      }
+    },
+    {
+      "price": "$2",
+      "name": {
+        "en": "Extra Rice", "es": "Arroz Extra", "vi": "Thêm Cơm", "zh-CN": "加米饭", "yue": "加米飯",
+        "de": "Extra Reis", "ko": "밥 추가", "ja": "ライス追加", "tl": "Extra Kanin", "fr": "Riz Supplémentaire"
+      }
+    },
+    {
+      "price": "$2.50",
+      "name": {
+        "en": "Homemade Mac Salad", "es": "Ensalada de Macarrones Casera", "vi": "Salad Nĩa Mì Nhà Làm", "zh-CN": "自制通心粉沙拉", "yue": "自製通心粉沙律",
+        "de": "Hausgemachter Nudelsalat", "ko": "홈메이드 마카로니 샐러드", "ja": "自家製マカロニサラダ", "tl": "Homemade Mac Salad", "fr": "Salade de Macaroni Maison"
+      }
+    }
+  ],
+  "drinksHeading": {
+    "en": "Drinks (All $1.50)", "es": "Bebidas (Todas $1.50)", "vi": "Đồ Uống (Đồng Giá $1.50)", "zh-CN": "饮料（均价$1.50）", "yue": "飲品（均價$1.50）",
+    "de": "Getränke (Alle $1.50)", "ko": "음료 (전 품목 $1.50)", "ja": "ドリンク（全品$1.50）", "tl": "Inumin (Lahat $1.50)", "fr": "Boissons (Toutes à 1,50$)"
+  },
+  "drinksList": {
+    "en": "Pepsi · Diet Pepsi · Iced Tea · Passion Orange · Bottled Water",
+    "es": "Pepsi · Pepsi Diet · Té Helado · Passion Orange · Agua Embotellada",
+    "vi": "Pepsi · Pepsi Diet · Trà Đá · Passion Orange · Nước Đóng Chai",
+    "zh-CN": "百事可乐 · 百事无糖 · 冰茶 · 热情橙饮 · 瓶装水",
+    "yue": "百事可樂 · 百事無糖 · 凍茶 · 熱情橙飲 · 瓶裝水",
+    "de": "Pepsi · Diet Pepsi · Eistee · Passion Orange · Wasser",
+    "ko": "펩시 · 다이어트 펩시 · 아이스티 · 패션 오렌지 · 병물",
+    "ja": "ペプシ · ダイエットペプシ · アイスティー · パッションオレンジ · ボトルウォーター",
+    "tl": "Pepsi · Diet Pepsi · Iced Tea · Passion Orange · Tubig sa Bote",
+    "fr": "Pepsi · Pepsi Diet · Thé Glacé · Passion Orange · Eau en Bouteille"
+  },
+  "partyHeading": {
+    "en": "Party Platters", "es": "Bandejas Para Fiestas", "vi": "Mâm Tiệc", "zh-CN": "派对拼盘", "yue": "派對拼盤",
+    "de": "Party-Platten", "ko": "파티 플래터", "ja": "パーティープラター", "tl": "Party Platters", "fr": "Plateaux Pour Événements"
+  },
+  "partyBody": {
+    "en": "Advance orders recommended. Wait times vary by location.",
+    "es": "Se recomienda ordenar con anticipación. Los tiempos de espera varían según la ubicación.",
+    "vi": "Nên đặt trước. Thời gian chờ khác nhau tùy địa điểm.",
+    "zh-CN": "建议提前预订。等候时间因地点而异。",
+    "yue": "建議提前預訂。等候時間因地點而異。",
+    "de": "Vorbestellung empfohlen. Wartezeiten variieren je nach Standort.",
+    "ko": "사전 주문을 권장합니다. 대기 시간은 지점마다 다릅니다.",
+    "ja": "事前注文をお勧めします。待ち時間は場所によって異なります。",
+    "tl": "Inirerekomenda ang advance order. Nag-iiba ang oras ng paghintay depende sa lokasyon.",
+    "fr": "Commande à l'avance recommandée. Le temps d'attente varie selon le lieu."
+  }
+}

@@ -2,8 +2,80 @@ import '../css/style.css'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import QRCode from 'qrcode'
+import menuData from '../data/menu.json'
 
 gsap.registerPlugin(ScrollTrigger)
+
+/* ---------------- Menu rendering (single source of truth: src/data/menu.json) ---------------- */
+const MENU_ICONS = {
+  chili: '<path d="M8.7 5c2.6-1.9 5-1 5.2.9.1 1-.5 1.7-1.3 2.2" /><path d="M7.2 7.3c-2.5 1.5-3.5 4.8-2.6 8 1 3.2 3.9 5.4 6.7 5 3.4-.6 5.6-4.2 4.7-8-.7-3.4-4.1-6.3-7-6-.6.1-1.2.3-1.8.6Z" />',
+  lemon: '<circle cx="12" cy="13" r="7" /><path d="M8.3 10c1.3 1.3 1.3 5.7 0 7M15.7 10c-1.3 1.3-1.3 5.7 0 7" /><path d="M12 6c.5-1.9 2.3-2.9 4.1-2.5-.4 1.9-2.2 3-4.1 2.5Z" />',
+  hotdog: '<path d="M3.5 15c0-2.2 1.8-4 4-4h9c2.2 0 4 1.8 4 4s-1.8 4-4 4h-9c-2.2 0-4-1.8-4-4Z" /><path d="M5.2 13c1 1.3 2 1.3 3 0s2-1.3 3 0 2 1.3 3 0 2-1.3 3 0" />',
+}
+const MENU_BADGE_COLORS = {
+  shrimp: 'bg-shrimp-100 text-shrimp-600',
+  red: 'bg-red-100 text-red-600',
+  lagoon: 'bg-lagoon-100 text-lagoon-600',
+  sun: 'bg-sun-100 text-sun-600',
+}
+const MENU_ICON_BG = {
+  red: 'bg-red-100 text-red-500',
+  lagoon: 'bg-sun-100 text-sun-600',
+  sun: 'bg-shrimp-100 text-shrimp-600',
+}
+
+function pick(field, lang) {
+  return field[lang] || field.en
+}
+
+function renderMenu(lang) {
+  const grid = document.getElementById('menu-grid')
+  const extras = document.getElementById('menu-extras')
+  if (!grid || !extras) return
+
+  grid.innerHTML = menuData.items
+    .map((item, i) => {
+      const media = item.image
+        ? `<div class="h-32 overflow-hidden"><img src="${item.image}" alt="${pick(item.name, lang)}" class="w-full h-full object-cover" /></div>`
+        : `<div class="h-11 w-11 rounded-2xl ${MENU_ICON_BG[item.badgeColor] || ''} flex items-center justify-center mb-4">
+             <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${MENU_ICONS[item.icon] || ''}</svg>
+           </div>`
+      const padded = item.image ? `<div class="p-6 flex flex-col flex-1">` : ''
+      const paddedClose = item.image ? `</div>` : ''
+      return `
+        <div class="menu-card bg-[#fffaf2] rounded-3xl ${item.image ? 'overflow-hidden' : 'p-6'} flex flex-col shadow-xl" data-delay="${i * 100}">
+          ${media}
+          ${padded}
+          <h3 class="font-heading font-extrabold text-lg mb-2">${pick(item.name, lang)}</h3>
+          <p class="text-ink/60 text-sm flex-1 mb-4">${pick(item.description, lang)}</p>
+          <div class="flex items-center justify-between">
+            <span class="font-display text-shrimp-500 text-2xl">${item.price}</span>
+            <span class="text-xs font-semibold ${MENU_BADGE_COLORS[item.badgeColor] || ''} px-3 py-1 rounded-full">${pick(item.badge, lang)}</span>
+          </div>
+          ${paddedClose}
+        </div>`
+    })
+    .join('')
+
+  extras.innerHTML = `
+    <div class="bg-white/5 border border-white/10 rounded-2xl p-6 text-white/80">
+      <h4 class="font-heading font-bold text-sun-400 mb-3">${pick(menuData.sidesHeading, lang)}</h4>
+      <ul class="text-sm space-y-1.5">
+        ${menuData.sides.map((s) => `<li class="flex justify-between"><span>${pick(s.name, lang)}</span><span class="font-semibold">${s.price}</span></li>`).join('')}
+      </ul>
+    </div>
+    <div class="bg-white/5 border border-white/10 rounded-2xl p-6 text-white/80">
+      <h4 class="font-heading font-bold text-sun-400 mb-3">${pick(menuData.drinksHeading, lang)}</h4>
+      <p class="text-sm">${pick(menuData.drinksList, lang)}</p>
+    </div>
+    <div class="bg-shrimp-500/15 border border-shrimp-500/30 rounded-2xl p-6 text-white">
+      <h4 class="font-heading font-bold mb-3">${pick(menuData.partyHeading, lang)}</h4>
+      <p class="text-sm text-white/80 mb-3">${pick(menuData.partyBody, lang)}</p>
+      <a href="tel:+18082931839" class="font-heading font-bold text-shrimp-400 hover:text-shrimp-300">(808) 293-1839</a>
+    </div>`
+}
+
+renderMenu('en')
 
 /* ---------------- Keep ScrollTrigger in sync with late-loading fonts/images ---------------- */
 if (document.fonts && document.fonts.ready) {
@@ -341,6 +413,10 @@ function applyLanguage(lang) {
   })
   // Cosmetic fade-in only. The text swap above is immediate and does not depend on this running.
   gsap.fromTo(targets, { opacity: 0.3 }, { opacity: 1, duration: 0.35 })
+
+  renderMenu(lang)
+  const menuEls = [...document.querySelectorAll('#menu-grid .menu-card'), document.getElementById('menu-extras')]
+  gsap.fromTo(menuEls, { opacity: 0.3 }, { opacity: 1, duration: 0.35 })
 
   const info = I18N[lang] || I18N.en
   const flagEl = document.getElementById('lang-flag')

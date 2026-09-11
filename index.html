@@ -95,19 +95,21 @@
   <!-- HERO -->
   <section id="top" class="relative min-h-[100svh] flex items-center justify-center overflow-hidden bg-ink grain">
     <!--
-      Hero background media. Currently a blurred still photo (the source crop is
-      low-res, so it's blurred on purpose rather than shown sharp).
-      To swap in a landscape video later, replace the <img> below with:
-        <video autoplay muted loop playsinline poster="/assets/truck.png" class="w-full h-full object-cover">
+      Hero background media: a real, high-resolution truck photo.
+      To swap in a landscape video later, replace the <picture> below with:
+        <video autoplay muted loop playsinline poster="/assets/truck-hero-bg.jpg" class="w-full h-full object-cover">
           <source src="/assets/hero-truck.mp4" type="video/mp4" />
         </video>
       Drop the video file into public/assets/ and update the src above. Everything
       else (gradient, glow blobs, text) sits on top and needs no changes.
     -->
-    <div id="hero-media" class="absolute inset-0 scale-110">
-      <img src="/assets/truck.png" alt="" class="w-full h-full object-cover blur-3xl opacity-50" />
+    <div id="hero-media" class="absolute inset-0">
+      <picture>
+        <source srcset="/assets/truck-hero-bg.webp" type="image/webp" />
+        <img src="/assets/truck-hero-bg.jpg" alt="" class="w-full h-full object-cover" fetchpriority="high" />
+      </picture>
     </div>
-    <div class="absolute inset-0 bg-gradient-to-b from-ink/50 via-ink/75 to-ink"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-ink/60 via-ink/70 to-ink"></div>
 
     <div class="absolute inset-0 opacity-70">
       <div class="absolute -top-24 -left-24 h-[28rem] w-[28rem] rounded-full bg-shrimp-500/40 blur-3xl animate-blob" data-parallax="0.4"></div>
@@ -335,6 +337,60 @@
       </div>
     </div>
   </section>
+
+  <!-- GALLERY -->
+  <section id="gallery" class="relative bg-ink py-24 md:py-32 grain overflow-hidden">
+    <div class="max-w-6xl mx-auto px-5 md:px-8">
+      <div class="reveal text-center max-w-2xl mx-auto mb-16">
+        <span class="font-heading font-bold text-sun-400 tracking-[0.25em] uppercase text-xs md:text-sm">In Real Life</span>
+        <h2 class="font-heading font-black text-3xl md:text-5xl text-white mt-3">Every Inch, Signed</h2>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+        <button type="button" class="gallery-item reveal relative rounded-2xl overflow-hidden aspect-[4/3] group" data-full="/assets/gallery-truck-side.jpg" data-caption="The truck, covered edge to edge in customer signatures." data-delay="0">
+          <picture>
+            <source srcset="/assets/gallery-truck-side.webp" type="image/webp" />
+            <img src="/assets/gallery-truck-side.jpg" alt="Giovanni's Shrimp Truck, side view covered in signatures" loading="lazy" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+          </picture>
+        </button>
+        <button type="button" class="gallery-item reveal relative rounded-2xl overflow-hidden aspect-[4/3] group" data-full="/assets/gallery-truck-window.jpg" data-caption="The order window. Cash only, worth the wait." data-delay="80">
+          <picture>
+            <source srcset="/assets/gallery-truck-window.webp" type="image/webp" />
+            <img src="/assets/gallery-truck-window.jpg" alt="Giovanni's Shrimp Truck order window" loading="lazy" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+          </picture>
+        </button>
+        <button type="button" class="gallery-item reveal relative rounded-2xl overflow-hidden aspect-[4/3] group" data-full="/assets/scampi.png" data-caption="Shrimp Scampi, straight off the griddle." data-delay="160">
+          <img src="/assets/scampi.png" alt="Giovanni's Shrimp Scampi plate" loading="lazy" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+        </button>
+        <button type="button" class="gallery-item reveal relative rounded-2xl overflow-hidden aspect-[4/3] group" data-full="/assets/gallery-logo-detail.jpg" data-caption="The name, hand-painted, decades of signatures around it." data-delay="240">
+          <picture>
+            <source srcset="/assets/gallery-logo-detail.webp" type="image/webp" />
+            <img src="/assets/gallery-logo-detail.jpg" alt="Close-up of the Giovanni's logo painted on the truck" loading="lazy" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+          </picture>
+        </button>
+        <button type="button" class="gallery-item reveal relative rounded-2xl overflow-hidden aspect-[4/3] group" data-full="/assets/gallery-signatures-detail.jpg" data-caption="Thousands of names, one truck." data-delay="320">
+          <picture>
+            <source srcset="/assets/gallery-signatures-detail.webp" type="image/webp" />
+            <img src="/assets/gallery-signatures-detail.jpg" alt="Close-up of customer signatures covering the truck roof" loading="lazy" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+          </picture>
+        </button>
+        <button type="button" class="gallery-item reveal relative rounded-2xl overflow-hidden aspect-[4/3] group" data-full="/assets/truck-signatures.png" data-caption="Add yours next time you're in line." data-delay="400">
+          <img src="/assets/truck-signatures.png" alt="Signatures on Giovanni's Shrimp Truck" loading="lazy" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery lightbox -->
+  <div id="gallery-lightbox" class="hidden fixed inset-0 z-[90] flex items-center justify-center px-5">
+    <div id="gallery-lightbox-backdrop" class="absolute inset-0 bg-ink/90 backdrop-blur-sm"></div>
+    <div class="relative max-w-3xl w-full">
+      <button id="gallery-lightbox-close" aria-label="Close" class="absolute -top-10 right-0 text-white/70 hover:text-white transition-colors">
+        <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18" /></svg>
+      </button>
+      <img id="gallery-lightbox-img" src="" alt="" class="w-full rounded-2xl shadow-2xl" />
+      <p id="gallery-lightbox-caption" class="text-white/70 text-sm text-center mt-3"></p>
+    </div>
+  </div>
 
   <!-- LOCATIONS -->
   <section id="locations" class="relative bg-lagoon-900 py-24 md:py-32 grain overflow-hidden">

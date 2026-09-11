@@ -224,6 +224,40 @@ gsap.utils.toArray('.menu-card').forEach((card, i) => {
   })
 })
 
+/* ---------------- Gallery lightbox ---------------- */
+const galleryLightbox = document.getElementById('gallery-lightbox')
+if (galleryLightbox) {
+  const lightboxImg = document.getElementById('gallery-lightbox-img')
+  const lightboxCaption = document.getElementById('gallery-lightbox-caption')
+
+  function openLightbox(item) {
+    lightboxImg.src = item.dataset.full
+    lightboxImg.alt = item.querySelector('img')?.alt || ''
+    lightboxCaption.textContent = item.dataset.caption || ''
+    galleryLightbox.classList.remove('hidden')
+    gsap.fromTo(galleryLightbox, { opacity: 0 }, { opacity: 1, duration: 0.25 })
+    gsap.fromTo(lightboxImg, { scale: 0.92, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4, ease: 'back.out(1.6)' })
+    document.body.style.overflow = 'hidden'
+  }
+
+  function closeLightbox() {
+    gsap.to(galleryLightbox, { opacity: 0, duration: 0.2 })
+    setTimeout(() => {
+      galleryLightbox.classList.add('hidden')
+      document.body.style.overflow = ''
+    }, 220)
+  }
+
+  document.querySelectorAll('.gallery-item').forEach((item) => {
+    item.addEventListener('click', () => openLightbox(item))
+  })
+  document.getElementById('gallery-lightbox-close').addEventListener('click', closeLightbox)
+  document.getElementById('gallery-lightbox-backdrop').addEventListener('click', closeLightbox)
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !galleryLightbox.classList.contains('hidden')) closeLightbox()
+  })
+}
+
 /* ---------------- Highlight card popup ---------------- */
 const highlightModal = document.getElementById('highlight-modal')
 if (highlightModal) {

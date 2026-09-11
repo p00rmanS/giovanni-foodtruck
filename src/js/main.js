@@ -6,6 +6,14 @@ import menuData from '../data/menu.json'
 
 gsap.registerPlugin(ScrollTrigger)
 
+// Respect prefers-reduced-motion: the CSS media query in style.css handles CSS
+// transitions/keyframes, but GSAP animates via inline styles, so it needs its
+// own opt-out. Speeding the global timeline way up keeps every tween's end
+// state (opacity, layout, etc.) correct while making the motion imperceptible.
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  gsap.globalTimeline.timeScale(50)
+}
+
 /* ---------------- Menu rendering (single source of truth: src/data/menu.json) ---------------- */
 const MENU_ICONS = {
   chili: '<path d="M8.7 5c2.6-1.9 5-1 5.2.9.1 1-.5 1.7-1.3 2.2" /><path d="M7.2 7.3c-2.5 1.5-3.5 4.8-2.6 8 1 3.2 3.9 5.4 6.7 5 3.4-.6 5.6-4.2 4.7-8-.7-3.4-4.1-6.3-7-6-.6.1-1.2.3-1.8.6Z" />',
@@ -131,16 +139,18 @@ ScrollTrigger.create({
 const toggleBtn = document.getElementById('menu-toggle')
 const mobileMenu = document.getElementById('mobile-menu')
 let mobileOpen = false
-toggleBtn.addEventListener('click', () => {
-  mobileOpen = !mobileOpen
-  mobileMenu.style.maxHeight = mobileOpen ? mobileMenu.scrollHeight + 'px' : '0px'
-})
-document.querySelectorAll('.mobile-link').forEach((link) => {
-  link.addEventListener('click', () => {
-    mobileOpen = false
-    mobileMenu.style.maxHeight = '0px'
+if (toggleBtn && mobileMenu) {
+  toggleBtn.addEventListener('click', () => {
+    mobileOpen = !mobileOpen
+    mobileMenu.style.maxHeight = mobileOpen ? mobileMenu.scrollHeight + 'px' : '0px'
   })
-})
+  document.querySelectorAll('.mobile-link').forEach((link) => {
+    link.addEventListener('click', () => {
+      mobileOpen = false
+      mobileMenu.style.maxHeight = '0px'
+    })
+  })
+}
 
 /* ---------------- Scroll reveal ---------------- */
 document.querySelectorAll('.reveal').forEach((el) => {

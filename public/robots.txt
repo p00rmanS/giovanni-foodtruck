@@ -1,0 +1,11 @@
+# This is a pitch/demo build, not the live site — everything is disallowed for now.
+# Before a real launch:
+#   1. Remove the <meta name="robots" content="noindex,nofollow"> tag in index.html
+#   2. Replace the block below with:
+#        User-agent: *
+#        Allow: /
+#
+#        Sitemap: https://giovannisshrimptruck.com/sitemap.xml
+
+User-agent: *
+Disallow: /

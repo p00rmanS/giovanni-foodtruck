@@ -19,6 +19,34 @@ body {
   color: #fffaf2;
 }
 
+/* Skip link: visually hidden until keyboard-focused */
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 1rem;
+  z-index: 200;
+  background: #f9541c;
+  color: #fffaf2;
+  font-weight: 700;
+  padding: 0.6rem 1.25rem;
+  border-radius: 999px;
+}
+.skip-link:focus {
+  left: 1rem;
+}
+
+/* Respect the user's OS-level reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 /* Scroll reveal */
 .reveal {
   opacity: 0;

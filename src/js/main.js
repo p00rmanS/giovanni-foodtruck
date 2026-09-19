@@ -368,39 +368,49 @@ function updateLocationStatus() {
 updateLocationStatus()
 setInterval(updateLocationStatus, 60000)
 
-/* ---------------- Weather (Open-Meteo, keyless): Kahuku, O'ahu ---------------- */
+/* ---------------- Weather: NWS hourly forecast for Kahuku (public domain, no key) ---------------- */
+const weatherWrap = document.getElementById('live-weather')
 const weatherTemp = document.getElementById('weather-temp')
 const weatherIcon = document.getElementById('weather-icon')
-// Inner SVG markup only. The wrapping <svg> tag/attrs stay fixed in the HTML; this maps to WMO weather codes.
+const NWS_HOURLY_URL = 'https://api.weather.gov/gridpoints/HFO/151,161/forecast/hourly'
 const SUN_ICON = '<circle cx="12" cy="12" r="4.2" /><path stroke-linecap="round" d="M12 3v2.2M12 18.8V21M4.2 12H2M22 12h-2.2M5.6 5.6l1.6 1.6M16.8 16.8l1.6 1.6M18.4 5.6l-1.6 1.6M7.2 16.8l-1.6 1.6" />'
+const MOON_ICON = '<path stroke-linecap="round" stroke-linejoin="round" d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z" />'
 const CLOUD_ICON = '<path stroke-linecap="round" stroke-linejoin="round" d="M7 18a4 4 0 0 1-.5-7.97A5.5 5.5 0 0 1 17 9.5 4 4 0 0 1 17 18H7Z" />'
 const PARTLY_CLOUDY_ICON = '<path stroke-linecap="round" d="M6 8.2V6.6M6 8.2l-1.3-1.1M6 8.2l1.3-1.1" /><path stroke-linecap="round" stroke-linejoin="round" d="M10 19a3.6 3.6 0 0 1-.4-7.18A5 5 0 0 1 19 13.5 3.6 3.6 0 0 1 19 19h-9Z" />'
 const RAIN_ICON = '<path stroke-linecap="round" stroke-linejoin="round" d="M7 15.5a4 4 0 0 1-.5-7.97A5.5 5.5 0 0 1 17 9 4 4 0 0 1 17 15.5H7Z" /><path stroke-linecap="round" d="M8.5 18.5l-1 2M12 18.5l-1 2M15.5 18.5l-1 2" />'
 const STORM_ICON = '<path stroke-linecap="round" stroke-linejoin="round" d="M7 14.5a4 4 0 0 1-.5-7.97A5.5 5.5 0 0 1 17 8 4 4 0 0 1 17 14.5H7Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M13 15l-2.5 4h2.5l-1.5 3.5" />'
 const FOG_ICON = '<path stroke-linecap="round" d="M4 9h16M3 13h18M4 17h12" />'
-const WEATHER_ICONS = {
-  0: SUN_ICON, 1: SUN_ICON, 2: PARTLY_CLOUDY_ICON, 3: CLOUD_ICON,
-  45: FOG_ICON, 48: FOG_ICON,
-  51: RAIN_ICON, 53: RAIN_ICON, 55: RAIN_ICON,
-  61: RAIN_ICON, 63: RAIN_ICON, 65: RAIN_ICON,
-  80: RAIN_ICON, 81: RAIN_ICON, 82: STORM_ICON,
-  95: STORM_ICON,
+
+function pickWeatherIcon(forecast, isDaytime) {
+  const t = forecast.toLowerCase()
+  if (t.includes('thunder')) return STORM_ICON
+  if (/(rain|shower|drizzle)/.test(t)) return RAIN_ICON
+  if (/(fog|mist|haze|smoke)/.test(t)) return FOG_ICON
+  if (t.includes('mostly sunny') || t.includes('mostly clear')) return isDaytime ? SUN_ICON : MOON_ICON
+  if (t.includes('partly')) return isDaytime ? PARTLY_CLOUDY_ICON : CLOUD_ICON
+  if (/(cloudy|overcast)/.test(t)) return CLOUD_ICON
+  return isDaytime ? SUN_ICON : MOON_ICON
 }
-fetch('https://api.open-meteo.com/v1/forecast?latitude=21.68&longitude=-157.95&current=temperature_2m,weather_code&temperature_unit=fahrenheit')
-  .then((res) => res.json())
-  .then((data) => {
-    const temp = Math.round(data?.current?.temperature_2m)
-    const code = data?.current?.weather_code
-    if (!Number.isNaN(temp) && weatherTemp) {
+
+if (weatherWrap && weatherTemp && weatherIcon) {
+  fetch(NWS_HOURLY_URL)
+    .then((res) => {
+      if (!res.ok) throw new Error(`NWS responded ${res.status}`)
+      return res.json()
+    })
+    .then((data) => {
+      const now = data?.properties?.periods?.[0]
+      const temp = Math.round(Number(now?.temperature))
+      if (!now || Number.isNaN(temp) || now.temperatureUnit !== 'F') throw new Error('Unexpected NWS response')
       weatherTemp.textContent = `Kahuku ${temp}°F`
-    }
-    if (weatherIcon && WEATHER_ICONS[code]) {
-      weatherIcon.innerHTML = WEATHER_ICONS[code]
-    }
-  })
-  .catch(() => {
-    if (weatherTemp) weatherTemp.textContent = 'Kahuku 82°F'
-  })
+      weatherIcon.innerHTML = pickWeatherIcon(now.shortForecast || '', now.isDaytime !== false)
+      weatherWrap.classList.remove('hidden')
+      weatherWrap.classList.add('inline-flex')
+    })
+    .catch(() => {
+      // Leave the widget hidden rather than show a made-up temperature.
+    })
+}
 
 /* ---------------- Language switcher (i18n) ---------------- */
 const I18N = {
